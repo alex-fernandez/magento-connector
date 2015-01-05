@@ -1,0 +1,952 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<connector name="Magento">
+    <global-config>
+        <config>
+            <attributes>
+                <optional caption="Name" group="Basic Settings" javaType="java.lang.String" name="name" type="name"/>
+                <optional caption="Username" group="Connection" javaType="java.lang.String" name="username" type="string"/>
+                <optional caption="Password" group="Connection" javaType="java.lang.String" name="password" type="password"/>
+                <optional caption="Address" group="Connection" javaType="java.lang.String" name="address" type="string"/>
+            </attributes>
+        </config>
+    </global-config>
+    <message-processors>
+        <!--
+        <add-order-shipment-comment>
+            <attributes>
+                <required caption="Shipment Id" group="General" javaType="java.lang.String" name="shipmentId" type="string"/>
+                <required caption="Comment" group="General" javaType="java.lang.String" name="comment" type="string"/>
+                <optional caption="Send Email" default="false" group="General" javaType="boolean" name="sendEmail" type="boolean"/>
+                <optional caption="Include Comment In Email" default="false" group="General" javaType="boolean" name="includeCommentInEmail" type="boolean"/>
+            </attributes>
+        </add-order-shipment-comment>
+        <add-order-shipment-track>
+            <attributes>
+                <required caption="Shipment Id" group="General" javaType="java.lang.String" name="shipmentId" type="string"/>
+                <required caption="Carrier Code" group="General" javaType="java.lang.String" name="carrierCode" type="string"/>
+                <required caption="Title" group="General" javaType="java.lang.String" name="title" type="string"/>
+                <required caption="Track Id" group="General" javaType="java.lang.String" name="trackId" type="string"/>
+            </attributes>
+        </add-order-shipment-track>
+        <cancel-order>
+            <attributes>
+                <required caption="Order Id" group="General" javaType="java.lang.String" name="orderId" type="string"/>
+            </attributes>
+        </cancel-order>
+        <create-order-shipment>
+            <attributes>
+                <required caption="Order Id" group="General" javaType="java.lang.String" name="orderId" type="string"/>
+                <optional caption="Comment" group="General" javaType="java.lang.String" name="comment" type="string"/>
+                <optional caption="Send Email" default="false" group="General" javaType="boolean" name="sendEmail" type="boolean"/>
+                <optional caption="Include Comment In Email" default="false" group="General" javaType="boolean" name="includeCommentInEmail" type="boolean"/>
+            </attributes>
+            <childElements/>
+        </create-order-shipment>
+        <get-order>
+            <attributes>
+                <required caption="Order Id" group="General" javaType="java.lang.String" name="orderId" type="string"/>
+            </attributes>
+        </get-order>
+        <get-order-invoice>
+            <attributes>
+                <required caption="Invoice Id" group="General" javaType="java.lang.String" name="invoiceId" type="string"/>
+            </attributes>
+        </get-order-invoice>
+        <get-order-shipment-carriers>
+            <attributes>
+                <required caption="Order Id" group="General" javaType="java.lang.String" name="orderId" type="string"/>
+            </attributes>
+        </get-order-shipment-carriers>
+        <get-order-shipment>
+            <attributes>
+                <required caption="Shipment Id" group="General" javaType="java.lang.String" name="shipmentId" type="string"/>
+            </attributes>
+        </get-order-shipment>
+        <hold-order>
+            <attributes>
+                <required caption="Order Id" group="General" javaType="java.lang.String" name="orderId" type="string"/>
+            </attributes>
+        </hold-order>
+        <list-orders>
+            <attributes>
+                <optional caption="Filter" group="Query" javaType="java.lang.String" name="filter" type="element-query"/>
+            </attributes>
+        </list-orders>
+        <list-orders-invoices>
+            <attributes>
+                <optional caption="Filter" group="Query" javaType="java.lang.String" name="filter" type="element-query"/>
+            </attributes>
+        </list-orders-invoices>
+        <list-orders-shipments>
+            <attributes>
+                <optional caption="Filter" group="Query" javaType="java.lang.String" name="filter" type="element-query"/>
+            </attributes>
+        </list-orders-shipments>
+        <delete-order-shipment-track>
+            <attributes>
+                <required caption="Shipment Id" group="General" javaType="java.lang.String" name="shipmentId" type="string"/>
+                <required caption="Track Id" group="General" javaType="java.lang.String" name="trackId" type="string"/>
+            </attributes>
+        </delete-order-shipment-track>
+        <add-order-comment>
+            <attributes>
+                <required caption="Order Id" group="General" javaType="java.lang.String" name="orderId" type="string"/>
+                <required caption="Status" group="General" javaType="java.lang.String" name="status" type="string"/>
+                <required caption="Comment" group="General" javaType="java.lang.String" name="comment" type="string"/>
+                <optional caption="Send Email" default="false" group="General" javaType="boolean" name="sendEmail" type="boolean"/>
+            </attributes>
+        </add-order-comment>
+        <unhold-order>
+            <attributes>
+                <required caption="Order Id" group="General" javaType="java.lang.String" name="orderId" type="string"/>
+            </attributes>
+        </unhold-order>
+        <create-order-invoice>
+            <attributes>
+                <required caption="Order Id" group="General" javaType="java.lang.String" name="orderId" type="string"/>
+                <optional caption="Comment" group="General" javaType="java.lang.String" name="comment" type="string"/>
+                <optional caption="Send Email" default="false" group="General" javaType="boolean" name="sendEmail" type="boolean"/>
+                <optional caption="Include Comment In Email" default="false" group="General" javaType="boolean" name="includeCommentInEmail" type="boolean"/>
+            </attributes>
+            <childElements/>
+        </create-order-invoice>
+        <add-order-invoice-comment>
+            <attributes>
+                <required caption="Invoice Id" group="General" javaType="java.lang.String" name="invoiceId" type="string"/>
+                <required caption="Comment" group="General" javaType="java.lang.String" name="comment" type="string"/>
+                <optional caption="Send Email" default="false" group="General" javaType="boolean" name="sendEmail" type="boolean"/>
+                <optional caption="Include Comment In Email" default="false" group="General" javaType="boolean" name="includeCommentInEmail" type="boolean"/>
+            </attributes>
+        </add-order-invoice-comment>
+        <capture-order-invoice>
+            <attributes>
+                <required caption="Invoice Id" group="General" javaType="java.lang.String" name="invoiceId" type="string"/>
+            </attributes>
+        </capture-order-invoice>
+        <void-order-invoice>
+            <attributes>
+                <required caption="Invoice Id" group="General" javaType="java.lang.String" name="invoiceId" type="string"/>
+            </attributes>
+        </void-order-invoice>
+        <cancel-order-invoice>
+            <attributes>
+                <required caption="Invoice Id" group="General" javaType="java.lang.String" name="invoiceId" type="string"/>
+            </attributes>
+        </cancel-order-invoice>
+        <create-customer-address>
+            <attributes>
+                <required caption="Customer Id" group="General" javaType="int" name="customerId" type="integer"/>
+            </attributes>
+            <childElements>
+                <optional group="Address Attributes" name="customer-address">
+                    <attributes caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                        <optional base="customer-address" caption="City" javaType="java.lang.String" name="city" type="string"/>
+                        <optional base="customer-address" caption="Company" javaType="java.lang.String" name="company" type="string"/>
+                        <optional base="customer-address" caption="Country_id" javaType="java.lang.String" name="country_id" type="string"/>
+                        <optional base="customer-address" caption="Fax" javaType="java.lang.String" name="fax" type="string"/>
+                        <optional base="customer-address" caption="Firstname" javaType="java.lang.String" name="firstname" type="string"/>
+                        <optional base="customer-address" caption="Lastname" javaType="java.lang.String" name="lastname" type="string"/>
+                        <optional base="customer-address" caption="Middlename" javaType="java.lang.String" name="middlename" type="string"/>
+                        <optional base="customer-address" caption="Postcode" javaType="java.lang.String" name="postcode" type="string"/>
+                        <optional base="customer-address" caption="Prefix" javaType="java.lang.String" name="prefix" type="string"/>
+                        <optional base="customer-address" caption="Region_id" javaType="java.lang.Integer" name="region_id" type="integer"/>
+                        <optional base="customer-address" caption="Region" javaType="java.lang.String" name="region" type="string"/>
+                        <optional base="customer-address" caption="Street Reference" javaType="java.lang.String[]" name="street-ref" type="string"/>
+                        <optional base="customer-address" caption="Suffix" javaType="java.lang.String" name="suffix" type="string"/>
+                        <optional base="customer-address" caption="Telephone" javaType="java.lang.String" name="telephone" type="string"/>
+                        <optional base="customer-address" caption="Is_default_billing" javaType="java.lang.Boolean" name="is_default_billing" type="boolean"/>
+                        <optional base="customer-address" caption="Is_default_shipping" javaType="java.lang.Boolean" name="is_default_shipping" type="boolean"/>
+                    </attributes>
+                    <attributes caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                        <required caption="Customer Address Reference" javaType="java.lang.String" name="ref" type="string"/>
+                    </attributes>
+                </optional>
+            </childElements>
+        </create-customer-address>
+        <create-customer>
+            <childElements>
+                <required group="Customer Attributes" name="customer">
+                    <attributes caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                        <optional base="customer" caption="Customer_id" javaType="java.lang.Integer" name="customer_id" type="integer"/>
+                        <optional base="customer" caption="Email" javaType="java.lang.String" name="email" type="string"/>
+                        <optional base="customer" caption="Firstname" javaType="java.lang.String" name="firstname" type="string"/>
+                        <optional base="customer" caption="Lastname" javaType="java.lang.String" name="lastname" type="string"/>
+                        <optional base="customer" caption="Website_id" javaType="java.lang.Integer" name="website_id" type="integer"/>
+                        <optional base="customer" caption="Store_id" javaType="java.lang.Integer" name="store_id" type="integer"/>
+                        <optional base="customer" caption="Group_id" javaType="java.lang.Integer" name="group_id" type="integer"/>
+                    </attributes>
+                    <attributes caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                        <required caption="Customer Reference" javaType="java.lang.String" name="ref" type="string"/>
+                    </attributes>
+                </required>
+            </childElements>
+        </create-customer>
+        <delete-customer>
+            <attributes>
+                <required caption="Customer Id" group="General" javaType="int" name="customerId" type="integer"/>
+            </attributes>
+        </delete-customer>
+        <delete-customer-address>
+            <attributes>
+                <required caption="Address Id" group="General" javaType="int" name="addressId" type="integer"/>
+            </attributes>
+        </delete-customer-address>
+        <get-customer>
+            <attributes>
+                <required caption="Customer Id" group="General" javaType="int" name="customerId" type="integer"/>
+            </attributes>
+            <childElements/>
+        </get-customer>
+        <get-customer-address>
+            <attributes>
+                <required caption="Address Id" group="General" javaType="int" name="addressId" type="integer"/>
+            </attributes>
+        </get-customer-address>
+        <list-customer-addresses>
+            <attributes>
+                <required caption="Customer Id" group="General" javaType="int" name="customerId" type="integer"/>
+            </attributes>
+        </list-customer-addresses>
+        <list-customer-groups/>
+        <list-customers>
+            <attributes>
+                <optional caption="Filter" group="Query" javaType="java.lang.String" name="filter" type="element-query"/>
+            </attributes>
+        </list-customers>
+        <update-customer>
+            <attributes>
+                <required caption="Customer Id" group="General" javaType="int" name="customerId" type="integer"/>
+            </attributes>
+            <childElements>
+                <optional group="Customer Attributes to Update" name="customer">
+                    <attributes caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                        <optional base="customer" caption="Customer_id" javaType="java.lang.Integer" name="customer_id" type="integer"/>
+                        <optional base="customer" caption="Email" javaType="java.lang.String" name="email" type="string"/>
+                        <optional base="customer" caption="Firstname" javaType="java.lang.String" name="firstname" type="string"/>
+                        <optional base="customer" caption="Lastname" javaType="java.lang.String" name="lastname" type="string"/>
+                        <optional base="customer" caption="Website_id" javaType="java.lang.Integer" name="website_id" type="integer"/>
+                        <optional base="customer" caption="Store_id" javaType="java.lang.Integer" name="store_id" type="integer"/>
+                        <optional base="customer" caption="Group_id" javaType="java.lang.Integer" name="group_id" type="integer"/>
+                    </attributes>
+                    <attributes caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                        <required caption="Customer Reference" javaType="java.lang.String" name="ref" type="string"/>
+                    </attributes>
+                </optional>
+            </childElements>
+        </update-customer>
+        <update-customer-address>
+            <attributes>
+                <required caption="Address Id" group="General" javaType="int" name="addressId" type="integer"/>
+            </attributes>
+            <childElements>
+                <required group="Address Attributes to Update" name="customer-address">
+                    <attributes caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                        <optional base="customer-address" caption="City" javaType="java.lang.String" name="city" type="string"/>
+                        <optional base="customer-address" caption="Company" javaType="java.lang.String" name="company" type="string"/>
+                        <optional base="customer-address" caption="Country_id" javaType="java.lang.String" name="country_id" type="string"/>
+                        <optional base="customer-address" caption="Fax" javaType="java.lang.String" name="fax" type="string"/>
+                        <optional base="customer-address" caption="Firstname" javaType="java.lang.String" name="firstname" type="string"/>
+                        <optional base="customer-address" caption="Lastname" javaType="java.lang.String" name="lastname" type="string"/>
+                        <optional base="customer-address" caption="Middlename" javaType="java.lang.String" name="middlename" type="string"/>
+                        <optional base="customer-address" caption="Postcode" javaType="java.lang.String" name="postcode" type="string"/>
+                        <optional base="customer-address" caption="Prefix" javaType="java.lang.String" name="prefix" type="string"/>
+                        <optional base="customer-address" caption="Region_id" javaType="java.lang.Integer" name="region_id" type="integer"/>
+                        <optional base="customer-address" caption="Region" javaType="java.lang.String" name="region" type="string"/>
+                        <optional base="customer-address" caption="Street Reference" javaType="java.lang.String[]" name="street-ref" type="string"/>
+                        <optional base="customer-address" caption="Suffix" javaType="java.lang.String" name="suffix" type="string"/>
+                        <optional base="customer-address" caption="Telephone" javaType="java.lang.String" name="telephone" type="string"/>
+                        <optional base="customer-address" caption="Is_default_billing" javaType="java.lang.Boolean" name="is_default_billing" type="boolean"/>
+                        <optional base="customer-address" caption="Is_default_shipping" javaType="java.lang.Boolean" name="is_default_shipping" type="boolean"/>
+                    </attributes>
+                    <attributes caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                        <required caption="Customer Address Reference" javaType="java.lang.String" name="ref" type="string"/>
+                    </attributes>
+                </required>
+            </childElements>
+        </update-customer-address>
+        -->
+        <list-stock-items>
+            <childElements/>
+        </list-stock-items>
+        <!--
+        <update-stock-item>
+            <attributes>
+                <required caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+            </attributes>
+            <childElements>
+                <optional group="Attributes to Update" name="stock-item">
+                    <attributes caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                        <optional base="stock-item" caption="Qty" javaType="java.lang.String" name="qty" type="string"/>
+                        <optional base="stock-item" caption="Is_in_stock" javaType="java.lang.Integer" name="is_in_stock" type="integer"/>
+                        <optional base="stock-item" caption="Manage_stock" javaType="java.lang.Integer" name="manage_stock" type="integer"/>
+                        <optional base="stock-item" caption="Use_config_manage_stock" javaType="java.lang.Integer" name="use_config_manage_stock" type="integer"/>
+                        <optional base="stock-item" caption="Min_qty" javaType="java.lang.Integer" name="min_qty" type="integer"/>
+                        <optional base="stock-item" caption="Use_config_min_qty" javaType="java.lang.Integer" name="use_config_min_qty" type="integer"/>
+                        <optional base="stock-item" caption="Min_sale_qty" javaType="java.lang.Integer" name="min_sale_qty" type="integer"/>
+                        <optional base="stock-item" caption="Use_config_min_sale_qty" javaType="java.lang.Integer" name="use_config_min_sale_qty" type="integer"/>
+                        <optional base="stock-item" caption="Max_sale_qty" javaType="java.lang.Integer" name="max_sale_qty" type="integer"/>
+                        <optional base="stock-item" caption="Use_config_max_sale_qty" javaType="java.lang.Integer" name="use_config_max_sale_qty" type="integer"/>
+                        <optional base="stock-item" caption="Is_qty_decimal" javaType="java.lang.Integer" name="is_qty_decimal" type="integer"/>
+                        <optional base="stock-item" caption="Backorders" javaType="java.lang.Integer" name="backorders" type="integer"/>
+                        <optional base="stock-item" caption="Use_config_backorders" javaType="java.lang.Integer" name="use_config_backorders" type="integer"/>
+                        <optional base="stock-item" caption="Notify_stock_qty" javaType="java.lang.Integer" name="notify_stock_qty" type="integer"/>
+                        <optional base="stock-item" caption="Use_config_notify_stock_qty" javaType="java.lang.Integer" name="use_config_notify_stock_qty" type="integer"/>
+                    </attributes>
+                    <attributes caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                        <required caption="Stock Item Reference" javaType="java.lang.String" name="ref" type="string"/>
+                    </attributes>
+                </optional>
+            </childElements>
+        </update-stock-item>
+        <list-directory-countries/>
+        <list-directory-regions>
+            <attributes>
+                <required caption="Country Id" group="General" javaType="java.lang.String" name="countryId" type="string"/>
+            </attributes>
+        </list-directory-regions>
+        <add-product-link>
+            <attributes>
+                <required caption="Type" group="General" javaType="java.lang.String" name="type" type="string"/>
+                <optional caption="Product Id" group="General" javaType="java.lang.Integer" name="productId" type="integer"/>
+                <optional caption="Product Sku" group="General" javaType="java.lang.String" name="productSku" type="string"/>
+                <optional caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+                <required caption="Linked Product Id Or Sku" group="General" javaType="java.lang.String" name="linkedProductIdOrSku" type="string"/>
+            </attributes>
+            <childElements>
+                <optional group="Address Attributes to Update" name="product-link-entity">
+                    <attributes caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                        <optional base="product-link-entity" caption="Product_id" javaType="java.lang.String" name="product_id" type="string"/>
+                        <optional base="product-link-entity" caption="Type" javaType="java.lang.String" name="type" type="string"/>
+                        <optional base="product-link-entity" caption="Set" javaType="java.lang.String" name="set" type="string"/>
+                        <optional base="product-link-entity" caption="Sku" javaType="java.lang.String" name="sku" type="string"/>
+                        <optional base="product-link-entity" caption="Position" javaType="java.lang.String" name="position" type="string"/>
+                        <optional base="product-link-entity" caption="Qty" javaType="java.lang.String" name="qty" type="string"/>
+                    </attributes>
+                    <attributes caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                        <required caption="Product Link Entity Reference" javaType="java.lang.String" name="ref" type="string"/>
+                    </attributes>
+                </optional>
+            </childElements>
+        </add-product-link>
+        <create-product-attribute-media>
+            <attributes>
+                <optional caption="Product Id" group="General" javaType="java.lang.Integer" name="productId" type="integer"/>
+                <optional caption="Product Sku" group="General" javaType="java.lang.String" name="productSku" type="string"/>
+                <optional caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+                <optional caption="Store View Id Or Code" group="General" javaType="java.lang.String" name="storeViewIdOrCode" type="string"/>
+                <required caption="Mime Type" group="General" javaType="org.mule.module.magento.api.catalog.model.MediaMimeType" name="mimeType" type="enum"/>
+                <optional caption="Base File Name" group="General" javaType="java.lang.String" name="baseFileName" type="string"/>
+            </attributes>
+            <childElements>
+                <optional group="Media Attributes" name="catalog-product-attribute-media-entity">
+                    <attributes caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                        <optional base="catalog-product-attribute-media-entity" caption="Label" javaType="java.lang.String" name="label" type="string"/>
+                        <optional base="catalog-product-attribute-media-entity" caption="Position" javaType="java.lang.String" name="position" type="string"/>
+                        <optional base="catalog-product-attribute-media-entity" caption="Types Reference" javaType="java.lang.String[]" name="types-ref" type="string"/>
+                        <optional base="catalog-product-attribute-media-entity" caption="Exclude" javaType="java.lang.String" name="exclude" type="string"/>
+                        <optional base="catalog-product-attribute-media-entity" caption="Remove" javaType="java.lang.String" name="remove" type="string"/>
+                    </attributes>
+                    <attributes caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                        <required caption="Catalog Product Attribute Media Entity Reference" javaType="java.lang.String" name="ref" type="string"/>
+                    </attributes>
+                </optional>
+            </childElements>
+        </create-product-attribute-media>
+        <delete-product-attribute-media>
+            <attributes>
+                <optional caption="Product Id" group="General" javaType="java.lang.Integer" name="productId" type="integer"/>
+                <optional caption="Product Sku" group="General" javaType="java.lang.String" name="productSku" type="string"/>
+                <optional caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+                <required caption="File Name" group="General" javaType="java.lang.String" name="fileName" type="string"/>
+            </attributes>
+        </delete-product-attribute-media>
+        <delete-product-link>
+            <attributes>
+                <required caption="Type" group="General" javaType="java.lang.String" name="type" type="string"/>
+                <optional caption="Product Id" group="General" javaType="java.lang.Integer" name="productId" type="integer"/>
+                <optional caption="Product Sku" group="General" javaType="java.lang.String" name="productSku" type="string"/>
+                <optional caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+                <required caption="Linked Product Id Or Sku" group="General" javaType="java.lang.String" name="linkedProductIdOrSku" type="string"/>
+            </attributes>
+        </delete-product-link>
+        <get-product-attribute-media>
+            <attributes>
+                <optional caption="Product Id" group="General" javaType="java.lang.Integer" name="productId" type="integer"/>
+                <optional caption="Product Sku" group="General" javaType="java.lang.String" name="productSku" type="string"/>
+                <optional caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+                <required caption="File Name" group="General" javaType="java.lang.String" name="fileName" type="string"/>
+                <optional caption="Store View Id Or Code" group="General" javaType="java.lang.String" name="storeViewIdOrCode" type="string"/>
+            </attributes>
+        </get-product-attribute-media>
+        <get-catalog-current-store-view/>
+        <update-category-attribute-store-view>
+            <attributes>
+                <required caption="Store View Id Or Code" group="General" javaType="java.lang.String" name="storeViewIdOrCode" type="string"/>
+            </attributes>
+        </update-category-attribute-store-view>
+        <list-category-attributes/>
+        <list-category-attribute-options>
+            <attributes>
+                <required caption="Attribute Id" group="General" javaType="java.lang.String" name="attributeId" type="string"/>
+                <optional caption="Store View Id Or Code" group="General" javaType="java.lang.String" name="storeViewIdOrCode" type="string"/>
+            </attributes>
+        </list-category-attribute-options>
+        <list-product-attribute-media>
+            <attributes>
+                <optional caption="Product Id" group="General" javaType="java.lang.Integer" name="productId" type="integer"/>
+                <optional caption="Product Sku" group="General" javaType="java.lang.String" name="productSku" type="string"/>
+                <optional caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+                <optional caption="Store View Id Or Code" group="General" javaType="java.lang.String" name="storeViewIdOrCode" type="string"/>
+            </attributes>
+        </list-product-attribute-media>
+        <list-product-attribute-media-types>
+            <attributes>
+                <required caption="Set Id" group="General" javaType="int" name="setId" type="integer"/>
+            </attributes>
+        </list-product-attribute-media-types>
+        <list-product-attribute-options>
+            <attributes>
+                <required caption="Attribute Id" group="General" javaType="java.lang.String" name="attributeId" type="string"/>
+                <optional caption="Store View Id Or Code" group="General" javaType="java.lang.String" name="storeViewIdOrCode" type="string"/>
+            </attributes>
+        </list-product-attribute-options>
+        <list-product-attributes>
+            <attributes>
+                <required caption="Set Id" group="General" javaType="int" name="setId" type="integer"/>
+            </attributes>
+        </list-product-attributes>
+        <list-product-attribute-sets/>
+        <list-product-attribute-tier-prices>
+            <attributes>
+                <optional caption="Product Id" group="General" javaType="java.lang.Integer" name="productId" type="integer"/>
+                <optional caption="Product Sku" group="General" javaType="java.lang.String" name="productSku" type="string"/>
+                <optional caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+            </attributes>
+        </list-product-attribute-tier-prices>
+        <list-product-link>
+            <attributes>
+                <required caption="Type" group="General" javaType="java.lang.String" name="type" type="string"/>
+                <optional caption="Product Id" group="General" javaType="java.lang.Integer" name="productId" type="integer"/>
+                <optional caption="Product Sku" group="General" javaType="java.lang.String" name="productSku" type="string"/>
+                <optional caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+            </attributes>
+        </list-product-link>
+        <list-product-link-attributes>
+            <attributes>
+                <required caption="Type" group="General" javaType="java.lang.String" name="type" type="string"/>
+            </attributes>
+        </list-product-link-attributes>
+        <list-product-link-types/>
+        <list-product-types/>
+        <update-product-attribute-media>
+            <attributes>
+                <optional caption="Product Id" group="General" javaType="java.lang.Integer" name="productId" type="integer"/>
+                <optional caption="Product Sku" group="General" javaType="java.lang.String" name="productSku" type="string"/>
+                <optional caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+                <required caption="File Name" group="General" javaType="java.lang.String" name="fileName" type="string"/>
+                <optional caption="Store View Id Or Code" group="General" javaType="java.lang.String" name="storeViewIdOrCode" type="string"/>
+            </attributes>
+            <childElements>
+                <optional group="Media Attributes to Update" name="catalog-product-attribute-media-entity">
+                    <attributes caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                        <optional base="catalog-product-attribute-media-entity" caption="Label" javaType="java.lang.String" name="label" type="string"/>
+                        <optional base="catalog-product-attribute-media-entity" caption="Position" javaType="java.lang.String" name="position" type="string"/>
+                        <optional base="catalog-product-attribute-media-entity" caption="Types Reference" javaType="java.lang.String[]" name="types-ref" type="string"/>
+                        <optional base="catalog-product-attribute-media-entity" caption="Exclude" javaType="java.lang.String" name="exclude" type="string"/>
+                        <optional base="catalog-product-attribute-media-entity" caption="Remove" javaType="java.lang.String" name="remove" type="string"/>
+                    </attributes>
+                    <attributes caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                        <required caption="Catalog Product Attribute Media Entity Reference" javaType="java.lang.String" name="ref" type="string"/>
+                    </attributes>
+                </optional>
+            </childElements>
+        </update-product-attribute-media>
+        <update-product-attribute-tier-price>
+            <attributes>
+                <optional caption="Product Id" group="General" javaType="java.lang.Integer" name="productId" type="integer"/>
+                <optional caption="Product Sku" group="General" javaType="java.lang.String" name="productSku" type="string"/>
+                <optional caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+            </attributes>
+            <childElements>
+                <optional group="Tier Price Attributes to Update" name="catalog-product-tier-price-entity">
+                    <attributes caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                        <optional base="catalog-product-tier-price-entity" caption="Customer_group_id" javaType="java.lang.String" name="customer_group_id" type="string"/>
+                        <optional base="catalog-product-tier-price-entity" caption="Website" javaType="java.lang.String" name="website" type="string"/>
+                        <optional base="catalog-product-tier-price-entity" caption="Qty" javaType="java.lang.Integer" name="qty" type="integer"/>
+                        <optional base="catalog-product-tier-price-entity" caption="Price" javaType="java.lang.Double" name="price" type="string"/>
+                    </attributes>
+                    <attributes caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                        <required caption="Catalog Product Tier Price Entity Reference" javaType="java.lang.String" name="ref" type="string"/>
+                    </attributes>
+                </optional>
+            </childElements>
+        </update-product-attribute-tier-price>
+        <update-product-link>
+            <attributes>
+                <required caption="Type" group="General" javaType="java.lang.String" name="type" type="string"/>
+                <optional caption="Product Id" group="General" javaType="java.lang.Integer" name="productId" type="integer"/>
+                <optional caption="Product Sku" group="General" javaType="java.lang.String" name="productSku" type="string"/>
+                <optional caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+                <required caption="Linked Product Id Or Sku" group="General" javaType="java.lang.String" name="linkedProductIdOrSku" type="string"/>
+            </attributes>
+            <childElements>
+                <optional group="Link Attributes to Update" name="catalog-product-link-entity">
+                    <attributes caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                        <optional base="product-link-entity" caption="Product_id" javaType="java.lang.String" name="product_id" type="string"/>
+                        <optional base="product-link-entity" caption="Type" javaType="java.lang.String" name="type" type="string"/>
+                        <optional base="product-link-entity" caption="Set" javaType="java.lang.String" name="set" type="string"/>
+                        <optional base="product-link-entity" caption="Sku" javaType="java.lang.String" name="sku" type="string"/>
+                        <optional base="product-link-entity" caption="Position" javaType="java.lang.String" name="position" type="string"/>
+                        <optional base="product-link-entity" caption="Qty" javaType="java.lang.String" name="qty" type="string"/>
+                    </attributes>
+                    <attributes caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                        <required caption="Catalog Product Link Entity Reference" javaType="java.lang.String" name="ref" type="string"/>
+                    </attributes>
+                </optional>
+            </childElements>
+        </update-product-link>
+        <list-category-products>
+            <attributes>
+                <required caption="Category Id" group="General" javaType="int" name="categoryId" type="integer"/>
+            </attributes>
+        </list-category-products>
+        <add-category-product>
+            <attributes>
+                <required caption="Category Id" group="General" javaType="int" name="categoryId" type="integer"/>
+                <optional caption="Product Id" group="General" javaType="java.lang.Integer" name="productId" type="integer"/>
+                <optional caption="Product Sku" group="General" javaType="java.lang.String" name="productSku" type="string"/>
+                <optional caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+                <optional caption="Position" group="General" javaType="java.lang.String" name="position" type="string"/>
+            </attributes>
+        </add-category-product>
+        <create-category>
+            <attributes>
+                <required caption="Parent Id" group="General" javaType="int" name="parentId" type="integer"/>
+                <optional caption="Store View Id Or Code" group="General" javaType="java.lang.String" name="storeViewIdOrCode" type="string"/>
+            </attributes>
+            <childElements>
+                <optional group="Category Attributes" name="catalog-category-entity">
+                    <attributes caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                        <optional base="catalog-category-entity" caption="Is_active" javaType="java.lang.Integer" name="is_active" type="integer"/>
+                        <optional base="catalog-category-entity" caption="Position" javaType="java.lang.Integer" name="position" type="integer"/>
+                        <optional base="catalog-category-entity" caption="Available_sort_by Reference" javaType="java.lang.String[]" name="available_sort_by-ref" type="string"/>
+                        <optional base="catalog-category-entity" caption="Custom_design" javaType="java.lang.String" name="custom_design" type="string"/>
+                        <optional base="catalog-category-entity" caption="Custom_design_apply" javaType="java.lang.Integer" name="custom_design_apply" type="integer"/>
+                        <optional base="catalog-category-entity" caption="Custom_design_from" javaType="java.lang.String" name="custom_design_from" type="string"/>
+                        <optional base="catalog-category-entity" caption="Custom_design_to" javaType="java.lang.String" name="custom_design_to" type="string"/>
+                        <optional base="catalog-category-entity" caption="Custom_layout_update" javaType="java.lang.String" name="custom_layout_update" type="string"/>
+                        <optional base="catalog-category-entity" caption="Default_sort_by" javaType="java.lang.String" name="default_sort_by" type="string"/>
+                        <optional base="catalog-category-entity" caption="Description" javaType="java.lang.String" name="description" type="string"/>
+                        <optional base="catalog-category-entity" caption="Display_mode" javaType="java.lang.String" name="display_mode" type="string"/>
+                        <optional base="catalog-category-entity" caption="Is_anchor" javaType="java.lang.Integer" name="is_anchor" type="integer"/>
+                        <optional base="catalog-category-entity" caption="Landing_page" javaType="java.lang.Integer" name="landing_page" type="integer"/>
+                        <optional base="catalog-category-entity" caption="Meta_description" javaType="java.lang.String" name="meta_description" type="string"/>
+                        <optional base="catalog-category-entity" caption="Meta_keywords" javaType="java.lang.String" name="meta_keywords" type="string"/>
+                        <optional base="catalog-category-entity" caption="Meta_title" javaType="java.lang.String" name="meta_title" type="string"/>
+                        <optional base="catalog-category-entity" caption="Page_layout" javaType="java.lang.String" name="page_layout" type="string"/>
+                        <optional base="catalog-category-entity" caption="Url_key" javaType="java.lang.String" name="url_key" type="string"/>
+                        <optional base="catalog-category-entity" caption="Include_in_menu" javaType="java.lang.Integer" name="include_in_menu" type="integer"/>
+                    </attributes>
+                    <attributes caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                        <required caption="Catalog Category Entity Reference" javaType="java.lang.String" name="ref" type="string"/>
+                    </attributes>
+                </optional>
+            </childElements>
+        </create-category>
+        <delete-category>
+            <attributes>
+                <required caption="Category Id" group="General" javaType="int" name="categoryId" type="integer"/>
+            </attributes>
+        </delete-category>
+        <get-category>
+            <attributes>
+                <required caption="Category Id" group="General" javaType="int" name="categoryId" type="integer"/>
+                <optional caption="Store View Id Or Code" group="General" javaType="java.lang.String" name="storeViewIdOrCode" type="string"/>
+            </attributes>
+            <childElements/>
+        </get-category>
+        <list-category-levels>
+            <attributes>
+                <optional caption="Website" group="General" javaType="java.lang.String" name="website" type="string"/>
+                <optional caption="Store View Id Or Code" group="General" javaType="java.lang.String" name="storeViewIdOrCode" type="string"/>
+                <optional caption="Parent Category Id" group="General" javaType="java.lang.String" name="parentCategoryId" type="string"/>
+            </attributes>
+        </list-category-levels>
+        <move-category>
+            <attributes>
+                <required caption="Category Id" group="General" javaType="int" name="categoryId" type="integer"/>
+                <required caption="Parent Id" group="General" javaType="int" name="parentId" type="integer"/>
+                <optional caption="After Id" group="General" javaType="java.lang.String" name="afterId" type="string"/>
+            </attributes>
+        </move-category>
+        <delete-category-product>
+            <attributes>
+                <required caption="Category Id" group="General" javaType="int" name="categoryId" type="integer"/>
+                <optional caption="Product Id" group="General" javaType="java.lang.Integer" name="productId" type="integer"/>
+                <optional caption="Product Sku" group="General" javaType="java.lang.String" name="productSku" type="string"/>
+                <optional caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+            </attributes>
+        </delete-category-product>
+        <get-category-tree>
+            <attributes>
+                <required caption="Parent Id" group="General" javaType="java.lang.String" name="parentId" type="string"/>
+                <optional caption="Store View Id Or Code" group="General" javaType="java.lang.String" name="storeViewIdOrCode" type="string"/>
+            </attributes>
+        </get-category-tree>
+        <update-category>
+            <attributes>
+                <required caption="Category Id" group="General" javaType="int" name="categoryId" type="integer"/>
+                <optional caption="Store View Id Or Code" group="General" javaType="java.lang.String" name="storeViewIdOrCode" type="string"/>
+            </attributes>
+            <childElements>
+                <optional group="Category Attributes to Update" name="catalog-category-entity">
+                    <attributes caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                        <optional base="catalog-category-entity" caption="Is_active" javaType="java.lang.Integer" name="is_active" type="integer"/>
+                        <optional base="catalog-category-entity" caption="Position" javaType="java.lang.Integer" name="position" type="integer"/>
+                        <optional base="catalog-category-entity" caption="Available_sort_by Reference" javaType="java.lang.String[]" name="available_sort_by-ref" type="string"/>
+                        <optional base="catalog-category-entity" caption="Custom_design" javaType="java.lang.String" name="custom_design" type="string"/>
+                        <optional base="catalog-category-entity" caption="Custom_design_apply" javaType="java.lang.Integer" name="custom_design_apply" type="integer"/>
+                        <optional base="catalog-category-entity" caption="Custom_design_from" javaType="java.lang.String" name="custom_design_from" type="string"/>
+                        <optional base="catalog-category-entity" caption="Custom_design_to" javaType="java.lang.String" name="custom_design_to" type="string"/>
+                        <optional base="catalog-category-entity" caption="Custom_layout_update" javaType="java.lang.String" name="custom_layout_update" type="string"/>
+                        <optional base="catalog-category-entity" caption="Default_sort_by" javaType="java.lang.String" name="default_sort_by" type="string"/>
+                        <optional base="catalog-category-entity" caption="Description" javaType="java.lang.String" name="description" type="string"/>
+                        <optional base="catalog-category-entity" caption="Display_mode" javaType="java.lang.String" name="display_mode" type="string"/>
+                        <optional base="catalog-category-entity" caption="Is_anchor" javaType="java.lang.Integer" name="is_anchor" type="integer"/>
+                        <optional base="catalog-category-entity" caption="Landing_page" javaType="java.lang.Integer" name="landing_page" type="integer"/>
+                        <optional base="catalog-category-entity" caption="Meta_description" javaType="java.lang.String" name="meta_description" type="string"/>
+                        <optional base="catalog-category-entity" caption="Meta_keywords" javaType="java.lang.String" name="meta_keywords" type="string"/>
+                        <optional base="catalog-category-entity" caption="Meta_title" javaType="java.lang.String" name="meta_title" type="string"/>
+                        <optional base="catalog-category-entity" caption="Page_layout" javaType="java.lang.String" name="page_layout" type="string"/>
+                        <optional base="catalog-category-entity" caption="Url_key" javaType="java.lang.String" name="url_key" type="string"/>
+                        <optional base="catalog-category-entity" caption="Include_in_menu" javaType="java.lang.Integer" name="include_in_menu" type="integer"/>
+                    </attributes>
+                    <attributes caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                        <required caption="Catalog Category Entity Reference" javaType="java.lang.String" name="ref" type="string"/>
+                    </attributes>
+                </optional>
+            </childElements>
+        </update-category>
+        <update-category-product>
+            <attributes>
+                <required caption="Category Id" group="General" javaType="int" name="categoryId" type="integer"/>
+                <optional caption="Product Id" group="General" javaType="java.lang.Integer" name="productId" type="integer"/>
+                <optional caption="Product Sku" group="General" javaType="java.lang.String" name="productSku" type="string"/>
+                <optional caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+                <required caption="Position" group="General" javaType="java.lang.String" name="position" type="string"/>
+            </attributes>
+        </update-category-product>
+        <list-inventory-stock-items>
+            <childElements/>
+        </list-inventory-stock-items>
+        <update-inventory-stock-item>
+            <attributes>
+                <optional caption="Product Id" group="General" javaType="java.lang.Integer" name="productId" type="integer"/>
+                <optional caption="Product Sku" group="General" javaType="java.lang.String" name="productSku" type="string"/>
+                <optional caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+            </attributes>
+            <childElements>
+                <optional group="Stock Item Attributes" name="catalog-inventory-stock-item">
+                    <attributes caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                        <optional base="stock-item" caption="Qty" javaType="java.lang.String" name="qty" type="string"/>
+                        <optional base="stock-item" caption="Is_in_stock" javaType="java.lang.Integer" name="is_in_stock" type="integer"/>
+                        <optional base="stock-item" caption="Manage_stock" javaType="java.lang.Integer" name="manage_stock" type="integer"/>
+                        <optional base="stock-item" caption="Use_config_manage_stock" javaType="java.lang.Integer" name="use_config_manage_stock" type="integer"/>
+                        <optional base="stock-item" caption="Min_qty" javaType="java.lang.Integer" name="min_qty" type="integer"/>
+                        <optional base="stock-item" caption="Use_config_min_qty" javaType="java.lang.Integer" name="use_config_min_qty" type="integer"/>
+                        <optional base="stock-item" caption="Min_sale_qty" javaType="java.lang.Integer" name="min_sale_qty" type="integer"/>
+                        <optional base="stock-item" caption="Use_config_min_sale_qty" javaType="java.lang.Integer" name="use_config_min_sale_qty" type="integer"/>
+                        <optional base="stock-item" caption="Max_sale_qty" javaType="java.lang.Integer" name="max_sale_qty" type="integer"/>
+                        <optional base="stock-item" caption="Use_config_max_sale_qty" javaType="java.lang.Integer" name="use_config_max_sale_qty" type="integer"/>
+                        <optional base="stock-item" caption="Is_qty_decimal" javaType="java.lang.Integer" name="is_qty_decimal" type="integer"/>
+                        <optional base="stock-item" caption="Backorders" javaType="java.lang.Integer" name="backorders" type="integer"/>
+                        <optional base="stock-item" caption="Use_config_backorders" javaType="java.lang.Integer" name="use_config_backorders" type="integer"/>
+                        <optional base="stock-item" caption="Notify_stock_qty" javaType="java.lang.Integer" name="notify_stock_qty" type="integer"/>
+                        <optional base="stock-item" caption="Use_config_notify_stock_qty" javaType="java.lang.Integer" name="use_config_notify_stock_qty" type="integer"/>
+                    </attributes>
+                    <attributes caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                        <required caption="Catalog Inventory Stock Item Reference" javaType="java.lang.String" name="ref" type="string"/>
+                    </attributes>
+                </optional>
+            </childElements>
+        </update-inventory-stock-item>
+        <create-product>
+            <attributes>
+                <required caption="Type" group="General" javaType="java.lang.String" name="type" type="string"/>
+                <required caption="Set" group="General" javaType="int" name="set" type="integer"/>
+                <required caption="Sku" group="General" javaType="java.lang.String" name="sku" type="string"/>
+                <optional caption="Store View Id Or Code" group="General" javaType="java.lang.String" name="storeViewIdOrCode" type="string"/>
+            </attributes>
+            <childElements>
+                <optional group="Standard Product Attributes" name="attributes">
+                    <attributes caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                        <optional base="attributes" caption="Categories Reference" javaType="java.lang.String[]" name="categories-ref" type="string"/>
+                        <optional base="attributes" caption="Websites Reference" javaType="java.lang.String[]" name="websites-ref" type="string"/>
+                        <optional base="attributes" caption="Description" javaType="java.lang.String" name="description" type="string"/>
+                        <optional base="attributes" caption="Short_description" javaType="java.lang.String" name="short_description" type="string"/>
+                        <optional base="attributes" caption="Weight" javaType="java.lang.String" name="weight" type="string"/>
+                        <optional base="attributes" caption="Status" javaType="java.lang.String" name="status" type="string"/>
+                        <optional base="attributes" caption="Url_key" javaType="java.lang.String" name="url_key" type="string"/>
+                        <optional base="attributes" caption="Url_path" javaType="java.lang.String" name="url_path" type="string"/>
+                        <optional base="attributes" caption="Visibility" javaType="java.lang.String" name="visibility" type="string"/>
+                        <optional base="attributes" caption="Category_ids Reference" javaType="java.lang.String[]" name="category_ids-ref" type="string"/>
+                        <optional base="attributes" caption="Website_ids Reference" javaType="java.lang.String[]" name="website_ids-ref" type="string"/>
+                        <optional base="attributes" caption="Has_options" javaType="java.lang.String" name="has_options" type="string"/>
+                        <optional base="attributes" caption="Gift_message_available" javaType="java.lang.String" name="gift_message_available" type="string"/>
+                        <optional base="attributes" caption="Price" javaType="java.lang.String" name="price" type="string"/>
+                        <optional base="attributes" caption="Special_price" javaType="java.lang.String" name="special_price" type="string"/>
+                        <optional base="attributes" caption="Special_from_date" javaType="java.lang.String" name="special_from_date" type="string"/>
+                        <optional base="attributes" caption="Special_to_date" javaType="java.lang.String" name="special_to_date" type="string"/>
+                        <optional base="attributes" caption="Tax_class_id" javaType="java.lang.String" name="tax_class_id" type="string"/>
+                        <optional base="attributes" caption="Tier_price Reference" javaType="com.magento.api.CatalogProductTierPriceEntity[]" name="tier_price-ref" type="string"/>
+                        <optional base="attributes" caption="Meta_title" javaType="java.lang.String" name="meta_title" type="string"/>
+                        <optional base="attributes" caption="Meta_keyword" javaType="java.lang.String" name="meta_keyword" type="string"/>
+                        <optional base="attributes" caption="Meta_description" javaType="java.lang.String" name="meta_description" type="string"/>
+                        <optional base="attributes" caption="Custom_design" javaType="java.lang.String" name="custom_design" type="string"/>
+                        <optional base="attributes" caption="Custom_layout_update" javaType="java.lang.String" name="custom_layout_update" type="string"/>
+                        <optional base="attributes" caption="Options_container" javaType="java.lang.String" name="options_container" type="string"/>
+                    </attributes>
+                    <attributes caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                        <required caption="Attributes Reference" javaType="java.lang.String" name="ref" type="string"/>
+                    </attributes>
+                </optional>
+            </childElements>
+        </create-product>
+        <delete-product>
+            <attributes>
+                <optional caption="Product Id" group="General" javaType="java.lang.Integer" name="productId" type="integer"/>
+                <optional caption="Product Sku" group="General" javaType="java.lang.String" name="productSku" type="string"/>
+                <optional caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+            </attributes>
+        </delete-product>
+        <get-product-special-price>
+            <attributes>
+                <optional caption="Product Id" group="General" javaType="java.lang.Integer" name="productId" type="integer"/>
+                <optional caption="Product Sku" group="General" javaType="java.lang.String" name="productSku" type="string"/>
+                <optional caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+                <optional caption="Store View Id Or Code" group="General" javaType="java.lang.String" name="storeViewIdOrCode" type="string"/>
+            </attributes>
+        </get-product-special-price>
+        <get-product>
+            <attributes>
+                <optional caption="Product Id" group="General" javaType="java.lang.Integer" name="productId" type="integer"/>
+                <optional caption="Product Sku" group="General" javaType="java.lang.String" name="productSku" type="string"/>
+                <optional caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+                <optional caption="Store View Id Or Code" group="General" javaType="java.lang.String" name="storeViewIdOrCode" type="string"/>
+            </attributes>
+            <childElements/>
+        </get-product>
+        <list-products>
+            <attributes>
+                <optional caption="Filter" group="Query" javaType="java.lang.String" name="filter" type="element-query"/>
+                <optional caption="Store View Id Or Code" group="General" javaType="java.lang.String" name="storeViewIdOrCode" type="string"/>
+            </attributes>
+        </list-products>
+        <update-product-special-price>
+            <attributes>
+                <optional caption="Product Id" group="General" javaType="java.lang.Integer" name="productId" type="integer"/>
+                <optional caption="Product Sku" group="General" javaType="java.lang.String" name="productSku" type="string"/>
+                <optional caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+                <required caption="Special Price" group="General" javaType="java.lang.String" name="specialPrice" type="string"/>
+                <optional caption="From Date" group="General" javaType="java.lang.String" name="fromDate" type="string"/>
+                <optional caption="To Date" group="General" javaType="java.lang.String" name="toDate" type="string"/>
+                <optional caption="Store View Id Or Code" group="General" javaType="java.lang.String" name="storeViewIdOrCode" type="string"/>
+            </attributes>
+        </update-product-special-price>
+        <update-product>
+            <attributes>
+                <optional caption="Product Id" group="General" javaType="java.lang.Integer" name="productId" type="integer"/>
+                <optional caption="Product Sku" group="General" javaType="java.lang.String" name="productSku" type="string"/>
+                <optional caption="Product Id Or Sku" group="General" javaType="java.lang.String" name="productIdOrSku" type="string"/>
+                <optional caption="Store View Id Or Code" group="General" javaType="java.lang.String" name="storeViewIdOrCode" type="string"/>
+            </attributes>
+            <childElements>
+                <optional group="Standard Product Attributes to Update" name="catalog-product-entity">
+                    <attributes caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                        <optional base="attributes" caption="Categories Reference" javaType="java.lang.String[]" name="categories-ref" type="string"/>
+                        <optional base="attributes" caption="Websites Reference" javaType="java.lang.String[]" name="websites-ref" type="string"/>
+                        <optional base="attributes" caption="Description" javaType="java.lang.String" name="description" type="string"/>
+                        <optional base="attributes" caption="Short_description" javaType="java.lang.String" name="short_description" type="string"/>
+                        <optional base="attributes" caption="Weight" javaType="java.lang.String" name="weight" type="string"/>
+                        <optional base="attributes" caption="Status" javaType="java.lang.String" name="status" type="string"/>
+                        <optional base="attributes" caption="Url_key" javaType="java.lang.String" name="url_key" type="string"/>
+                        <optional base="attributes" caption="Url_path" javaType="java.lang.String" name="url_path" type="string"/>
+                        <optional base="attributes" caption="Visibility" javaType="java.lang.String" name="visibility" type="string"/>
+                        <optional base="attributes" caption="Category_ids Reference" javaType="java.lang.String[]" name="category_ids-ref" type="string"/>
+                        <optional base="attributes" caption="Website_ids Reference" javaType="java.lang.String[]" name="website_ids-ref" type="string"/>
+                        <optional base="attributes" caption="Has_options" javaType="java.lang.String" name="has_options" type="string"/>
+                        <optional base="attributes" caption="Gift_message_available" javaType="java.lang.String" name="gift_message_available" type="string"/>
+                        <optional base="attributes" caption="Price" javaType="java.lang.String" name="price" type="string"/>
+                        <optional base="attributes" caption="Special_price" javaType="java.lang.String" name="special_price" type="string"/>
+                        <optional base="attributes" caption="Special_from_date" javaType="java.lang.String" name="special_from_date" type="string"/>
+                        <optional base="attributes" caption="Special_to_date" javaType="java.lang.String" name="special_to_date" type="string"/>
+                        <optional base="attributes" caption="Tax_class_id" javaType="java.lang.String" name="tax_class_id" type="string"/>
+                        <optional base="attributes" caption="Tier_price Reference" javaType="com.magento.api.CatalogProductTierPriceEntity[]" name="tier_price-ref" type="string"/>
+                        <optional base="attributes" caption="Meta_title" javaType="java.lang.String" name="meta_title" type="string"/>
+                        <optional base="attributes" caption="Meta_keyword" javaType="java.lang.String" name="meta_keyword" type="string"/>
+                        <optional base="attributes" caption="Meta_description" javaType="java.lang.String" name="meta_description" type="string"/>
+                        <optional base="attributes" caption="Custom_design" javaType="java.lang.String" name="custom_design" type="string"/>
+                        <optional base="attributes" caption="Custom_layout_update" javaType="java.lang.String" name="custom_layout_update" type="string"/>
+                        <optional base="attributes" caption="Options_container" javaType="java.lang.String" name="options_container" type="string"/>
+                    </attributes>
+                    <attributes caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                        <required caption="Catalog Product Entity Reference" javaType="java.lang.String" name="ref" type="string"/>
+                    </attributes>
+                </optional>
+            </childElements>
+        </update-product>
+        <create-shopping-cart>
+            <attributes>
+                <optional caption="Store Id" group="General" javaType="java.lang.String" name="storeId" type="string"/>
+            </attributes>
+        </create-shopping-cart>
+        <get-info-shopping-cart>
+            <attributes>
+                <required caption="Quote Id" group="General" javaType="int" name="quoteId" type="integer"/>
+                <optional caption="Store Id" group="General" javaType="java.lang.String" name="storeId" type="string"/>
+            </attributes>
+        </get-info-shopping-cart>
+        <list-shopping-cart-totals>
+            <attributes>
+                <required caption="Quote Id" group="General" javaType="int" name="quoteId" type="integer"/>
+                <optional caption="Store Id" group="General" javaType="java.lang.String" name="storeId" type="string"/>
+            </attributes>
+        </list-shopping-cart-totals>
+        <create-shopping-cart-order>
+            <attributes>
+                <required caption="Quote Id" group="General" javaType="int" name="quoteId" type="integer"/>
+                <optional caption="Store Id" group="General" javaType="java.lang.String" name="storeId" type="string"/>
+            </attributes>
+            <childElements/>
+        </create-shopping-cart-order>
+        <list-shopping-cart-licenses>
+            <attributes>
+                <required caption="Quote Id" group="General" javaType="int" name="quoteId" type="integer"/>
+                <optional caption="Store Id" group="General" javaType="java.lang.String" name="storeId" type="string"/>
+            </attributes>
+        </list-shopping-cart-licenses>
+        <add-shopping-cart-product>
+            <attributes>
+                <required caption="Quote Id" group="General" javaType="int" name="quoteId" type="integer"/>
+                <optional caption="Store Id" group="General" javaType="java.lang.String" name="storeId" type="string"/>
+            </attributes>
+            <childElements/>
+        </add-shopping-cart-product>
+        <update-shopping-cart-product>
+            <attributes>
+                <required caption="Quote Id" group="General" javaType="int" name="quoteId" type="integer"/>
+                <optional caption="Store Id" group="General" javaType="java.lang.String" name="storeId" type="string"/>
+            </attributes>
+            <childElements/>
+        </update-shopping-cart-product>
+        <remove-shopping-cart-product>
+            <attributes>
+                <required caption="Quote Id" group="General" javaType="int" name="quoteId" type="integer"/>
+                <optional caption="Store Id" group="General" javaType="java.lang.String" name="storeId" type="string"/>
+            </attributes>
+            <childElements/>
+        </remove-shopping-cart-product>
+        <list-shopping-cart-products>
+            <attributes>
+                <required caption="Quote Id" group="General" javaType="int" name="quoteId" type="integer"/>
+                <optional caption="Store Id" group="General" javaType="java.lang.String" name="storeId" type="string"/>
+            </attributes>
+        </list-shopping-cart-products>
+        <move-shopping-cart-product-to-customer-quote>
+            <attributes>
+                <required caption="Quote Id" group="General" javaType="int" name="quoteId" type="integer"/>
+                <optional caption="Store Id" group="General" javaType="java.lang.String" name="storeId" type="string"/>
+            </attributes>
+            <childElements/>
+        </move-shopping-cart-product-to-customer-quote>
+        <set-shopping-cart-customer>
+            <attributes>
+                <required caption="Quote Id" group="General" javaType="int" name="quoteId" type="integer"/>
+                <optional caption="Store Id" group="General" javaType="java.lang.String" name="storeId" type="string"/>
+            </attributes>
+            <childElements>
+                <optional group="Customer attributes" name="customer">
+                    <attributes caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                        <optional base="customer" name="mode"/>
+                        <optional base="customer" caption="Customer_id" javaType="java.lang.Integer" name="customer_id" type="integer"/>
+                        <optional base="customer" caption="Email" javaType="java.lang.String" name="email" type="string"/>
+                        <optional base="customer" caption="Firstname" javaType="java.lang.String" name="firstname" type="string"/>
+                        <optional base="customer" caption="Lastname" javaType="java.lang.String" name="lastname" type="string"/>
+                        <optional base="customer" name="confirmation"/>
+                        <optional base="customer" caption="Website_id" javaType="java.lang.Integer" name="website_id" type="integer"/>
+                        <optional base="customer" caption="Store_id" javaType="java.lang.Integer" name="store_id" type="integer"/>
+                        <optional base="customer" caption="Group_id" javaType="java.lang.Integer" name="group_id" type="integer"/>
+                    </attributes>
+                    <attributes caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                        <required caption="Customer Reference" javaType="java.lang.String" name="ref" type="string"/>
+                    </attributes>
+                </optional>
+            </childElements>
+        </set-shopping-cart-customer>
+        <set-shopping-cart-customer-addresses>
+            <attributes>
+                <required caption="Quote Id" group="General" javaType="int" name="quoteId" type="integer"/>
+                <optional caption="Store Id" group="General" javaType="java.lang.String" name="storeId" type="string"/>
+            </attributes>
+            <childElements/>
+        </set-shopping-cart-customer-addresses>
+        <set-shopping-cart-shipping-method>
+            <attributes>
+                <required caption="Quote Id" group="General" javaType="int" name="quoteId" type="integer"/>
+                <required caption="Method" group="General" javaType="java.lang.String" name="method" type="string"/>
+                <optional caption="Store Id" group="General" javaType="java.lang.String" name="storeId" type="string"/>
+            </attributes>
+        </set-shopping-cart-shipping-method>
+        <list-shopping-cart-shipping-methods>
+            <attributes>
+                <required caption="Quote Id" group="General" javaType="int" name="quoteId" type="integer"/>
+                <optional caption="Store Id" group="General" javaType="java.lang.String" name="storeId" type="string"/>
+            </attributes>
+        </list-shopping-cart-shipping-methods>
+        <set-shopping-cart-payment-method>
+            <attributes>
+                <required caption="Quote Id" group="General" javaType="int" name="quoteId" type="integer"/>
+                <optional caption="Store Id" group="General" javaType="java.lang.String" name="storeId" type="string"/>
+            </attributes>
+            <childElements>
+                <optional group="Method attributes" name="shopping-cart-payment-method">
+                    <attributes caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                        <optional base="shopping-cart-payment-method" caption="Po_number" javaType="java.lang.String" name="po_number" type="string"/>
+                        <optional base="shopping-cart-payment-method" caption="Method" javaType="java.lang.String" name="method" type="string"/>
+                        <optional base="shopping-cart-payment-method" caption="Cc_cid" javaType="java.lang.String" name="cc_cid" type="string"/>
+                        <optional base="shopping-cart-payment-method" caption="Cc_owner" javaType="java.lang.String" name="cc_owner" type="string"/>
+                        <optional base="shopping-cart-payment-method" caption="Cc_number" javaType="java.lang.String" name="cc_number" type="string"/>
+                        <optional base="shopping-cart-payment-method" caption="Cc_type" javaType="java.lang.String" name="cc_type" type="string"/>
+                        <optional base="shopping-cart-payment-method" caption="Cc_exp_year" javaType="java.lang.String" name="cc_exp_year" type="string"/>
+                        <optional base="shopping-cart-payment-method" caption="Cc_exp_month" javaType="java.lang.String" name="cc_exp_month" type="string"/>
+                    </attributes>
+                    <attributes caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                        <required caption="Shopping Cart Payment Method Reference" javaType="java.lang.String" name="ref" type="string"/>
+                    </attributes>
+                </optional>
+            </childElements>
+        </set-shopping-cart-payment-method>
+        <list-shopping-cart-payment-methods>
+            <attributes>
+                <required caption="Quote Id" group="General" javaType="int" name="quoteId" type="integer"/>
+                <optional caption="Store Id" group="General" javaType="java.lang.String" name="storeId" type="string"/>
+            </attributes>
+        </list-shopping-cart-payment-methods>
+        <add-shopping-cart-coupon>
+            <attributes>
+                <required caption="Quote Id" group="General" javaType="int" name="quoteId" type="integer"/>
+                <required caption="Coupon Code" group="General" javaType="java.lang.String" name="couponCode" type="string"/>
+                <optional caption="Store Id" group="General" javaType="java.lang.String" name="storeId" type="string"/>
+            </attributes>
+        </add-shopping-cart-coupon>
+        <remove-shopping-cart-coupon>
+            <attributes>
+                <required caption="Quote Id" group="General" javaType="int" name="quoteId" type="integer"/>
+                <optional caption="Store Id" group="General" javaType="java.lang.String" name="storeId" type="string"/>
+            </attributes>
+        </remove-shopping-cart-coupon>
+        -->
+    </message-processors>
+    <inbound-endpoint/>
+    <outbound-endpoints/>
+</connector>

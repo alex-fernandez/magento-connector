@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:jdbc="http://www.mulesoft.org/schema/mule/jdbc"
+	version="EE-3.4.0" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:magento="http://www.mulesoft.org/schema/mule/magento" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+	http://www.mulesoft.org/schema/mule/jdbc http://www.mulesoft.org/schema/mule/jdbc/current/mule-jdbc.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/magento http://www.mulesoft.org/schema/mule/magento/1.1/mule-magento.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+
+	<context:property-placeholder location="${MAGENTO_CREDENTIALS}" />
+	
+	<jdbc:mysql-data-source name="MySQL_Data_Source" url="${magento.database.url}"
+		user="${magento.database.user}" password="${magento.database.password}"
+		transactionIsolation="UNSPECIFIED" />
+		
+	<jdbc:connector name="Database" dataSource-ref="MySQL_Data_Source"
+		validateConnections="true" queryTimeout="-1" pollingFrequency="0">
+       	<jdbc:query key="truncate_sales" value="call truncate_sales"/>
+       	<jdbc:query key="truncate_catalog_products" value="call truncate_catalog_products"/>	
+    </jdbc:connector> 
+
+	<flow name="truncate-catalog-products">
+		<jdbc:outbound-endpoint exchange-pattern="one-way" queryTimeout="-1" connector-ref="Database" queryKey="truncate_catalog_products" />
+	</flow>
+
+	<flow name="truncate-sales">
+		<jdbc:outbound-endpoint exchange-pattern="one-way" queryKey="truncate_sales" queryTimeout="-1" connector-ref="Database"/>
+	</flow>
+</mule>

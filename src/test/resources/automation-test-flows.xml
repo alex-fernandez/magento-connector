@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.4.0"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:magento="http://www.mulesoft.org/schema/mule/magento"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/magento http://www.mulesoft.org/schema/mule/magento/1.1/mule-magento.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+
+	<context:property-placeholder location="${MAGENTO_CREDENTIALS}" />
+
+	<magento:config name="Magento" username="${magento.username}"
+		password="${magento.password}" address="${magento.address}" doc:name="Magento">
+		<magento:connection-pooling-profile
+			initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW" />
+	</magento:config>
+
+	<flow name="create-customer">
+		<magento:create-customer config-ref="Magento">
+			<magento:customer ref="#[payload.customerRef]" />
+		</magento:create-customer>
+	</flow>
+
+	<flow name="delete-customer">
+		<magento:delete-customer config-ref="Magento"
+			customerId="#[payload.customerId]" />
+	</flow>
+
+	<flow name="list-customers-without-filter">
+		<magento:list-customers config-ref="Magento" />
+	</flow>
+
+	<flow name="list-customers-with-filter">
+		<magento:list-customers config-ref="Magento"
+			filter="#[payload.filter]" />
+	</flow>
+
+	<flow name="get-customer">
+		<magento:get-customer config-ref="Magento"
+			customerId="#[payload.customerId]">
+			<magento:attribute-names ref="#[payload.attributeNames]" />
+		</magento:get-customer>
+	</flow>
+
+	<flow name="update-customer">
+		<magento:update-customer config-ref="Magento"
+			customerId="#[payload.customerId]">
+			<magento:customer ref="#[payload.customerRef]" />
+		</magento:update-customer>
+	</flow>
+
+	<flow name="create-customer-address">
+		<magento:create-customer-address
+			config-ref="Magento" customerId="#[payload.customerId]">
+			<magento:customer-address ref="#[payload.customerAddressRef]" />
+		</magento:create-customer-address>
+	</flow>
+
+	<flow name="delete-customer-address">
+		<magento:delete-customer-address
+			config-ref="Magento" addressId="#[payload.addressId]" />
+	</flow>
+
+	<flow name="get-customer-address">
+		<magento:get-customer-address config-ref="Magento"
+			addressId="#[payload.addressId]" />
+	</flow>
+
+	<flow name="update-customer-address">
+		<magento:update-customer-address
+			config-ref="Magento" addressId="#[payload.addressId]">
+			<magento:customer-address ref="#[payload.customerAddressRef]" />
+		</magento:update-customer-address>
+	</flow>
+
+	<flow name="list-customer-addresses">
+		<magento:list-customer-addresses
+			config-ref="Magento" customerId="#[payload.customerId]" />
+	</flow>
+
+	<flow name="create-category">
+		<magento:create-category config-ref="Magento"
+			parentId="#[payload.parentId]">
+			<magento:catalog-category-entity
+				ref="#[payload.catalogCategoryEntityRef]" />
+		</magento:create-category>
+	</flow>
+
+	<flow name="delete-category">
+		<magento:delete-category config-ref="Magento"
+			categoryId="#[payload.categoryId]" />
+	</flow>
+
+	<flow name="move-category">
+		<magento:move-category categoryId="#[payload.categoryId]"
+			parentId="#[payload.parentId]" />
+	</flow>
+
+	<flow name="get-category">
+		<magento:get-category config-ref="Magento"
+			categoryId="#[payload.categoryId]">
+			<magento:attribute-names ref="#[payload.attributeNames]" />
+		</magento:get-category>
+	</flow>
+
+	<flow name="update-category">
+		<magento:update-category config-ref="Magento"
+			categoryId="#[payload.categoryId]">
+			<magento:catalog-category-entity
+				ref="#[payload.catalogCategoryEntityRef]" />
+		</magento:update-category>
+	</flow>
+
+	<flow name="get-category-tree">
+		<magento:get-category-tree config-ref="Magento"
+			parentId="#[payload.parentId]" />
+	</flow>
+
+	<flow name="get-catalog-current-store-view">
+		<magento:get-catalog-current-store-view
+			config-ref="Magento" />
+	</flow>
+
+	<flow name="list-category-levels">
+		<magento:list-category-levels config-ref="Magento" />
+	</flow>
+
+	<flow name="list-category-levels-with-parent-category">
+		<magento:list-category-levels config-ref="Magento"
+			parentCategoryId="#[payload.parentCategoryId]" />
+	</flow>
+
+	<flow name="list-category-attributes">
+		<magento:list-category-attributes
+			config-ref="Magento" />
+	</flow>
+
+	<flow name="list-category-attribute-options">
+		<magento:list-category-attribute-options
+			config-ref="Magento" attributeId="#[payload.attributeId]" />
+	</flow>
+
+	<flow name="list-customer-groups">
+		<magento:list-customer-groups config-ref="Magento" />
+	</flow>
+
+	<flow name="list-directory-countries">
+		<magento:list-directory-countries
+			config-ref="Magento" />
+	</flow>
+
+	<flow name="list-directory-regions">
+		<magento:list-directory-regions
+			config-ref="Magento" countryId="#[payload.countryId]" />
+	</flow>
+
+	<flow name="list-inventory-stock-items">
+		<magento:list-inventory-stock-items
+			config-ref="Magento">
+			<magento:product-id-or-skus ref="#[payload.productIdOrSkusRef]" />
+		</magento:list-inventory-stock-items>
+	</flow>
+
+	<flow name="list-orders-unfiltered">
+		<magento:list-orders config-ref="Magento" />
+	</flow>
+
+	<flow name="list-orders">
+		<magento:list-orders config-ref="Magento" filter="#[payload.filter]" />
+	</flow>
+
+	<flow name="create-product">
+		<magento:create-product config-ref="Magento"
+			set="#[payload.set]" sku="#[payload.sku]" type="#[payload.type]">
+			<magento:attributes ref="#[payload.attributesRef]" />
+		</magento:create-product>
+	</flow>
+
+	<flow name="delete-product-by-product-id">
+		<magento:delete-product productId="#[payload.productId]" config-ref="Magento" />
+	</flow>
+
+	<flow name="delete-product-by-product-sku">
+		<magento:delete-product productSku="#[payload.productSku]" config-ref="Magento" />
+	</flow>
+
+	<flow name="list-products">
+		<magento:list-products config-ref="Magento" />
+	</flow>
+
+	<flow name="delete-category-product">
+		<magento:delete-category-product
+			config-ref="Magento" categoryId="#[payload.categoryId]" productId="#[payload.productId]" />
+	</flow>
+
+	<flow name="create-shopping-cart">
+		<magento:create-shopping-cart config-ref="Magento" />
+	</flow>
+
+	<flow name="create-shopping-cart-with-store-id">
+		<magento:create-shopping-cart config-ref="Magento" storeId="#[payload.storeId]" />
+	</flow>
+	
+	<flow name="create-shopping-cart-order">
+		<magento:create-shopping-cart-order config-ref="Magento" quoteId="#[payload.quoteId]" storeId="#[payload.storeId]" />
+	</flow>
+
+	<flow name="create-shopping-cart-order-with-licenses">
+		<magento:create-shopping-cart-order config-ref="Magento" quoteId="#[payload.quoteId]">
+			<magento:licenses ref="#[payload.licensesRef]" />
+		</magento:create-shopping-cart-order>
+	</flow>
+	
+	<flow name="cancel-order">
+		<magento:cancel-order config-ref="Magento" orderId="#[payload.orderId]" />
+	</flow>
+	
+	<flow name="add-order-comment">
+		<magento:add-order-comment orderId="#[payload.orderId]" status="#[payload.status]" comment="#[payload.comment]"/>
+	</flow>
+	
+	<flow name="get-order">
+		<magento:get-order config-ref="Magento" orderId="#[payload.orderId]" />
+	</flow>
+	
+	<flow name="hold-order">
+		<magento:hold-order config-ref="Magento" orderId="#[payload.orderId]" />
+	</flow>
+	
+	<flow name="unhold-order">
+		<magento:unhold-order config-ref="Magento" orderId="#[payload.orderId]"/>
+	</flow>
+	
+	<flow name="create-order-invoice">
+		<magento:create-order-invoice config-ref="Magento" orderId="#[payload.orderId]" >
+			<magento:items-quantities ref="#[payload.itemsQuantitiesRef]" />
+		</magento:create-order-invoice>
+	</flow>
+	
+	<flow name="void-order-invoice">
+		<magento:void-order-invoice config-ref="Magento" invoiceId="#[payload.invoiceId]" />
+	</flow>
+	
+	<flow name="add-order-invoice-comment">
+		<magento:add-order-invoice-comment config-ref="Magento" invoiceId="#[payload.invoiceId]" comment="#[payload.comment]" />
+	</flow>
+	
+	<flow name="create-order-invoice-with-comment">
+		<magento:create-order-invoice config-ref="Magento" orderId="#[payload.orderId]" comment="#[payload.comment]">
+			<magento:items-quantities ref="#[payload.itemsQuantitiesRef]" />
+		</magento:create-order-invoice>
+	</flow>
+	
+	<flow name="cancel-order-invoice">
+		<magento:cancel-order-invoice config-ref="Magento" invoiceId="#[payload.invoiceId]" />
+	</flow>
+	
+	<flow name="capture-order-invoice">
+		<magento:capture-order-invoice config-ref="Magento" invoiceId="#[payload.invoiceId]" />
+	</flow>
+	
+	<flow name="get-order-invoice">
+		<magento:get-order-invoice config-ref="Magento" invoiceId="#[payload.invoiceId]" />
+	</flow>
+	
+	<flow name="add-order-shipment-track">
+		<magento:add-order-shipment-track config-ref="Magento" shipmentId="#[payload.shipmentId]" carrierCode="#[payload.carrierCode]" 
+					trackId="#[payload.trackId]" title="#[payload.title]" />
+	</flow>
+	
+	<flow name="delete-order-shipment-track">
+		<magento:delete-order-shipment-track config-ref="Magento" shipmentId="#[payload.shipmentId]" trackId="#[payload.trackId]" />
+	</flow>
+	
+	<flow name="create-order-shipment">
+		<magento:create-order-shipment config-ref="Magento" orderId="#[payload.orderId]">
+			<magento:items-quantities ref="#[payload.itemsQuantitiesRef]" />
+		</magento:create-order-shipment>
+	</flow>
+	
+	<flow name="create-order-shipment-with-comment">
+		<magento:create-order-shipment config-ref="Magento" orderId="#[payload.orderId]" comment="#[payload.comment]">
+			<magento:items-quantities ref="#[payload.itemsQuantitiesRef]" />
+		</magento:create-order-shipment>
+	</flow>
+	
+	<flow name="get-order-shipment">
+		<magento:get-order-shipment config-ref="Magento" shipmentId="#[payload.shipmentId]"/>
+	</flow>
+	
+	<flow name="get-order-shipment-carriers">
+		<magento:get-order-shipment-carriers config-ref="Magento" orderId="#[payload.orderId]" />
+	</flow>
+	
+	<flow name="add-order-shipment-comment">
+		<magento:add-order-shipment-comment config-ref="Magento" shipmentId="#[payload.shipmentId]" comment="#[payload.comment]" />
+	</flow>
+	
+	<flow name="get-info-shopping-cart">
+		<magento:get-info-shopping-cart config-ref="Magento" quoteId="#[payload.quoteId]" storeId="#[payload.storeId]" />
+	</flow>
+
+	<flow name="add-shopping-cart-product">
+		<magento:add-shopping-cart-product storeId="#[payload.storeId]"
+			config-ref="Magento" quoteId="#[payload.quoteId]">
+			<magento:products ref="#[payload.productsRef]" />
+		</magento:add-shopping-cart-product>
+	</flow>
+
+	<flow name="remove-shopping-cart-product">
+		<magento:remove-shopping-cart-product storeId="#[payload.storeId]"
+			config-ref="Magento" quoteId="#[payload.quoteId]">
+			<magento:products ref="#[payload.productsRef]" />
+		</magento:remove-shopping-cart-product>
+	</flow>
+
+	<flow name="add-shopping-cart-coupon">
+		<magento:add-shopping-cart-coupon config-ref="Magento" quoteId="#[payload.quoteId]" couponCode="#[payload.couponCode]" storeId="#[payload.storeId]" />
+	</flow>
+	
+	<flow name="remove-shopping-cart-coupon">
+		<magento:remove-shopping-cart-coupon config-ref="Magento" storeId="#[payload.storeId]" quoteId="#[payload.quoteId]" />
+	</flow>
+
+	<flow name="list-shopping-cart-totals">
+		<magento:list-shopping-cart-totals storeId="#[payload.storeId]"
+			config-ref="Magento" quoteId="#[payload.quoteId]" />
+	</flow>
+
+	<flow name="list-shopping-cart-products">
+		<magento:list-shopping-cart-products storeId="#[payload.storeId]"
+			config-ref="Magento" quoteId="#[payload.quoteId]" />
+	</flow>
+
+	<flow name="list-shopping-cart-payment-methods">
+		<magento:list-shopping-cart-payment-methods config-ref="Magento" storeId="#[payload.storeId]" quoteId="#[payload.quoteId]" />
+	</flow>
+	
+	<flow name="list-shopping-cart-shipping-methods">
+		<magento:list-shopping-cart-shipping-methods config-ref="Magento" storeId="#[payload.storeId]" quoteId="#[payload.quoteId]" />
+	</flow>
+	
+	<flow name="list-shopping-cart-licenses">
+		<magento:list-shopping-cart-licenses config-ref="Magento" storeId="#[payload.storeId]" quoteId="#[payload.quoteId]" />
+	</flow>
+
+	<flow name="set-shopping-cart-customer">
+		<magento:set-shopping-cart-customer storeId="#[payload.storeId]"
+			config-ref="Magento" quoteId="#[payload.quoteId]">
+			<magento:customer ref="#[payload.customerRef]" />
+		</magento:set-shopping-cart-customer>
+	</flow>
+
+	<flow name="set-shopping-cart-customer-addresses">
+		<magento:set-shopping-cart-customer-addresses storeId="#[payload.storeId]"
+			config-ref="Magento" quoteId="#[payload.quoteId]">
+			<magento:shopping-cart-customer-addresses
+				ref="#[payload.shoppingCartCustomerAddressesRef]" />
+		</magento:set-shopping-cart-customer-addresses>
+	</flow>
+	
+	<flow name="set-shopping-cart-payment-method">
+		<magento:set-shopping-cart-payment-method config-ref="Magento" storeId="#[payload.storeId]" quoteId="#[payload.quoteId]">
+			<magento:shopping-cart-payment-method ref="#[payload.shoppingCartPaymentMethodRef]" />
+		</magento:set-shopping-cart-payment-method>
+	</flow>
+	
+	<flow name="set-shopping-cart-shipping-method">
+		<magento:set-shopping-cart-shipping-method config-ref="Magento" storeId="#[payload.storeId]" quoteId="#[payload.quoteId]" method="#[payload.method]" />		
+	</flow>
+	
+	<flow name="add-category-product">
+		<magento:add-category-product categoryId="#[payload.categoryId]"
+			position="#[payload.position]" productId="#[payload.productId]" config-ref="Magento" />
+	</flow>
+
+	<!-- The following will break all tests with a SAX parse exception. the position attribute is necessary here but according to Magento doc it is not. -->
+	<flow name="add-category-product-without-position">
+		<magento:add-category-product categoryId="#[payload.categoryId]"
+			productId="#[payload.productId]" config-ref="Magento" />
+	</flow>
+	
+	<flow name="list-category-products">
+		<magento:list-category-products
+			categoryId="#[payload.categoryId]" config-ref="Magento" />
+	</flow>
+
+	<flow name="add-product-link">
+		<magento:add-product-link type="#[payload.type]"
+			productId="#[payload.productId]" linkedProductIdOrSku="#[payload.linkedProductIdOrSku]" config-ref="Magento">
+			<magento:product-link-entity qty="#[payload.qty]" />
+		</magento:add-product-link>
+	</flow>
+
+	<flow name="list-product-link">
+		<magento:list-product-link productId="#[payload.productId]"
+			type="#[payload.type]" config-ref="Magento" />
+	</flow>
+
+	<flow name="delete-product-link">
+		<magento:delete-product-link type="#[payload.type]"
+			productId="#[payload.productId]" linkedProductIdOrSku="#[payload.linkedProductIdOrSku]" config-ref="Magento" />
+	</flow>
+
+	<flow name="update-shopping-cart-product">
+		<magento:update-shopping-cart-product config-ref="Magento" storeId="#[payload.storeId]" quoteId="#[payload.quoteId]" >
+			<magento:products ref="#[payload.productsRef]" />
+		</magento:update-shopping-cart-product>
+	</flow>
+
+	<flow name="update-product-special-price">
+		<magento:update-product-special-price config-ref="Magento" specialPrice="#[payload.specialPrice]" fromDate="#[payload.fromDate]"
+			toDate="#[payload.toDate]" productId="#[payload.productId]" />
+	</flow>
+
+	<flow name="update-product">
+		<magento:update-product productId="#[payload.productId]" config-ref="Magento">
+			<magento:catalog-product-entity name="#[payload.name]" />
+		</magento:update-product>
+	</flow>
+
+	<flow name="update-product-link">
+		<magento:update-product-link config-ref="Magento" type="#[payload.type]"
+			productId="#[payload.productId]" linkedProductIdOrSku="#[payload.linkedProductIdOrSku]">
+			<magento:catalog-product-link-entity
+				qty="#[payload.qty]" />
+		</magento:update-product-link>
+	</flow>
+
+	<flow name="get-product">
+		<magento:get-product productId="#[payload.productId]" config-ref="Magento">
+			<magento:attributes-names>
+				<magento:attributes-name>#[payload.attributesName]</magento:attributes-name>
+			</magento:attributes-names>
+		</magento:get-product>
+	</flow>
+	
+	<flow name="get-product-special-price">
+		<magento:get-product-special-price config-ref="Magento" productId="#[payload.productId]"/>
+	</flow>
+	
+	<flow name="list-product-link-attributes">
+		<magento:list-product-link-attributes type="#[payload.type]" config-ref="Magento" />
+	</flow>
+	
+	<flow name="list-product-attributes">
+		<magento:list-product-attributes setId="#[payload.setId]" config-ref="Magento" />
+	</flow>
+	
+	<flow name="list-product-types">
+		<magento:list-product-types config-ref="Magento" />
+	</flow>
+	
+	<flow name="list-product-link-types">
+		<magento:list-product-link-types config-ref="Magento" />
+	</flow>
+	
+	<flow name="create-product-attribute-media">
+		<magento:create-product-attribute-media config-ref="Magento" productId="#[flowVars.productId]" baseFileName="#[flowVars.baseFileName]" mimeType="#[flowVars.mimeType]">
+		    <magento:catalog-product-attribute-media-entity label="#[flowVars.label]" position="#[flowVars.position]" />
+		</magento:create-product-attribute-media>
+	</flow>
+	
+	<flow name="delete-product-attribute-media">
+		<magento:delete-product-attribute-media config-ref="Magento" productId="#[payload.productId]" fileName="#[payload.fileName]"/>
+	</flow>
+	
+	<flow name="get-product-attribute-media">
+		<magento:get-product-attribute-media config-ref="Magento" productId="#[payload.productId]" fileName="#[payload.fileName]" />
+	</flow>
+	
+	<flow name="update-product-attribute-media">
+		<magento:update-product-attribute-media config-ref="Magento" fileName="#[payload.fileName]" productId="#[payload.productId]">
+		    <magento:catalog-product-attribute-media-entity label="#[payload.label]" position="#[payload.position]" />
+		</magento:update-product-attribute-media>
+	</flow>
+	
+	<flow name="list-stock-items">
+		<magento:list-stock-items config-ref="Magento">
+		    <magento:product-id-or-skus>
+		        <magento:product-id-or-sku>#[payload.productId]</magento:product-id-or-sku>
+		    </magento:product-id-or-skus>
+		</magento:list-stock-items>
+	</flow>
+	
+	<flow name="update-stock-item">
+		<magento:update-stock-item config-ref="Magento" productIdOrSku="#[payload.productIdOrSku]" >
+			<magento:stock-item ref="#[payload.stockItemRef]"/>
+		</magento:update-stock-item>
+	</flow>
+	
+	<flow name="update-category-product">
+		<magento:update-category-product config-ref="Magento" categoryId="#[payload.categoryId]" position="#[payload.position]" productId="#[payload.productId]" />
+	</flow>
+	
+	<flow name="update-inventory-stock-item">
+		<magento:update-inventory-stock-item productId="#[payload.productId]" config-ref="Magento">
+		    <magento:catalog-inventory-stock-item qty="#[payload.qty]" />
+		</magento:update-inventory-stock-item>
+	</flow>
+	
+	<flow name="move-shopping-cart-product-to-customer-quote">
+		<magento:move-shopping-cart-product-to-customer-quote config-ref="Magento" quoteId="#[payload.quoteId]">
+			<magento:products ref="#[payload.productsRef]" />
+		</magento:move-shopping-cart-product-to-customer-quote>
+	</flow>
+	
+	<flow name="list-product-attribute-media">
+		<magento:list-product-attribute-media config-ref="Magento" productId="#[payload.productId]" />
+	</flow>
+	
+	<flow name="update-product-attribute-tier-price">
+		<magento:update-product-attribute-tier-price productId="#[flowVars.productId]">
+<!-- 			This is ignored. The CatalogProductTierPriceEntity needs to be the payload. -->
+<!-- 			<magento:catalog-product-tier-price-entity ref="#[flowVars.catalogProductTierPriceEntityRef]"/> -->
+		</magento:update-product-attribute-tier-price>
+	</flow>
+	
+	<flow name="list-product-attribute-media-types">
+		<magento:list-product-attribute-media-types config-ref="Magento" setId="#[payload.setId]"/>
+	</flow>
+	
+	<flow name="list-product-attribute-options">
+		<magento:list-product-attribute-options config-ref="Magento" attributeId="#[payload.attributeId]"/>
+	</flow>
+	
+	<flow name="list-product-attribute-sets">
+		<magento:list-product-attribute-sets config-ref="Magento" />
+	</flow>
+	
+	<flow name="list-product-attribute-tier-prices">
+		<magento:list-product-attribute-tier-prices config-ref="Magento" productId="#[payload.productId]"/>
+	</flow>
+	
+	<flow name="update-category-attribute-store-view">
+		<magento:update-category-attribute-store-view config-ref="Magento" storeViewIdOrCode="#[payload.storeViewIdOrCode]" />
+	</flow>
+	
+	<flow name="list-orders-invoices-without-filter">
+		<magento:list-orders-invoices config-ref="Magento" />
+	</flow>
+	
+	<flow name="list-orders-invoices-with-filter">
+		<magento:list-orders-invoices config-ref="Magento" filter="#[payload.filterOperator](#[payload.filterKey], #[payload.invoiceId])"/>
+	</flow>
+	
+	<flow name="list-orders-shipments-without-filter">
+		<magento:list-orders-shipments config-ref="Magento" />
+	</flow>
+	
+	<flow name="list-orders-shipments-with-filter">
+		<magento:list-orders-shipments config-ref="Magento" filter="#[payload.filterOperator](#[payload.filterKey], #[payload.shipmentId])"/>
+	</flow>
+</mule>

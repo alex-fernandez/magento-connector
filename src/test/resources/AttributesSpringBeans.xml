@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	<util:list id="customerAttributeNames" value-type="java.lang.String">
+		<value>created_at</value>
+		<value>updated_at</value>
+		<value>increment_id</value>
+		<value>website_id</value>
+		<value>created_in</value>
+		<value>email</value>
+		<value>firstname</value>
+		<value>middlename</value>
+		<value>lastname</value>
+		<value>group_id</value>
+		<value>prefix</value>
+		<value>suffix</value>
+		<value>dob</value>
+		<value>taxvat</value>
+		<value>confirmation</value>
+		<value>password_hash</value>
+		<value>rp_token</value>
+		<value>rp_token_created_at</value>
+	</util:list>
+
+	<util:list id="categoryAttributeNames" value-type="java.lang.String">
+		<value>is_active</value>
+		<value>position</value>
+		<value>level</value>
+		<value>parent_id</value>
+		<value>all_children</value>
+		<value>children</value>
+		<value>created_at</value>
+		<value>updated_at</value>
+		<value>name</value>
+		<value>url_key</value>
+		<value>description</value>
+		<value>meta_title</value>
+		<value>meta_keywords</value>
+		<value>meta_description</value>
+		<value>path</value>
+		<value>url_path</value>
+		<value>children_count</value>
+		<value>display_mode</value>
+		<value>is_anchor</value>
+		<value>available_sort_by</value>
+		<value>custom_design</value>
+		<value>custom_apply_to_products</value>
+		<value>custom_design_from</value>
+		<value>custom_design_to</value>
+		<value>page_layout</value>
+		<value>custom_layout_update</value>
+		<value>default_sort_by</value>
+		<value>landing_page</value>
+		<value>include_in_menu</value>
+		<value>filter_price_range</value>
+		<value>custom_use_parent_settings</value>
+		<value>increment_id</value>
+		<value>thumbnail</value>
+		<value>image</value>
+		<value>path_in_store</value>
+	</util:list>
+
+</beans>

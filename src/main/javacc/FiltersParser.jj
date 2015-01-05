@@ -1,0 +1,90 @@
+options {
+	STATIC = false ;
+}
+PARSER_BEGIN(FiltersParser)
+    package org.mule.module.magento.filters;
+    import  java.io.ByteArrayInputStream;
+    import  com.magento.api.Filters;
+
+	/**
+	 * A Magento's filter expression parser.
+	 */    
+	public class FiltersParser {
+	
+	private FiltersBuilder builder = new FiltersBuilder(); 
+	
+	/**
+	 * Parses a filter expression. 
+	 * <p>
+	 * The syntax used by it is quite simple: it consist of one or more comma-separated 
+	 * unary or binary predicates, one for each filter.
+	 * Unary predicates are in the form &lt;predicateType&gt;(&lt;targetAttribute&gt;), while binary ones
+	 * are in the form &lt;predicateType&gt;(&lt;targetAttribute&gt;, &lt;targetAttributeValue&gt;), where
+	 * &lt;predicateType&gt; is any of the supported Magento operators: eq, neq, like, null, etc.
+	 * </p>
+	 * <p> 
+	 * For example, the following expressions creates a filter for entities whose customer id is greater
+	 * than 1500, and its deletion date is not null:
+	 * <code>gt(customer_id, 1500), notnull(deletion_date)</code>
+	 * </p>
+	 *
+	 * @param expression a nullable expression. in the previously described syntax.
+	 *		  Null expressions and empty expressions are interpreted as empty filters  
+	 * @return a Filter for the given expression
+	 * @throws IllegalArgumentException if the expression can not be parsed
+	 */
+	public static Filters parse(String expression)  {
+		if(org.apache.commons.lang.StringUtils.isEmpty(expression)) {
+		  return new Filters();
+		}
+		try{
+			return new FiltersParser(new ByteArrayInputStream(expression.getBytes())).start();
+		} catch(ParseException e){
+		   throw new IllegalArgumentException("Syntax error in filter expression", e);
+		}
+	}
+}
+	
+PARSER_END(FiltersParser)
+
+
+SKIP : { " " | "\n" | "\r" | "\t" }
+TOKEN : { < COMMA : "," > }
+TOKEN : { < BINARY_OP : "from" | "to" | "eq" | "neq" | "like" | "nlike" | "is" | "gt" | "gteq" | "lt" | "lteq" | "nin" | "in" > }
+TOKEN : { < UNARY_OP : "null" | "notnull" | "istrue" | "isfalse" > }
+TOKEN : { < INDIV : < NUMBER > | < STRING > > }
+TOKEN : { < NUMBER : ("-")?(["0"-"9"])+ > }
+TOKEN : { < STRING : "'" (~["'"])* "'" > }
+TOKEN : { < IDENTIFIER : (["a"-"z","A"-"Z","_"])+ > }
+TOKEN : { < OPEN_PAR : "(" > }
+TOKEN : { < CLOSE_PAR : ")" > }
+
+
+Filters start() : 
+{ }
+{ 
+  simpleExpression() (<COMMA> simpleExpression())* 
+  {return builder.build();}
+}
+
+void simpleExpression() :
+{}
+{ binaryExpression() | unaryFilter() }
+
+void binaryExpression() :
+{ Token operation, variable, value; }
+{ operation = <BINARY_OP> <OPEN_PAR> 
+  variable = <IDENTIFIER> <COMMA> 
+  value = <INDIV> <CLOSE_PAR>
+  {  builder.addBinaryExpression(operation.image, variable.image, value.image); }
+}
+
+void unaryFilter() :
+{ Token operation, variable; }
+{ operation = <UNARY_OP> <OPEN_PAR> 
+  variable = <IDENTIFIER> <CLOSE_PAR>
+  {  builder.addUnaryExpression(operation.image, variable.image); }  
+}
+ 
+
+     

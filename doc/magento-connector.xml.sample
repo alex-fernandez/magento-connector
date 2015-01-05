@@ -1,0 +1,500 @@
+<!-- BEGIN_INCLUDE(magento:addOrderShipmentComment) -->
+<magento:add-order-shipment-comment shipmentId="#[map-payload:shipmentId]" comment="#[map-payload:comment]"/>
+<!-- END_INCLUDE(magento:addOrderShipmentComment) -->
+
+<!-- BEGIN_INCLUDE(magento:addOrderShipmentTrack) -->
+        <magento:add-order-shipment-track shipmentId="#[map-payload:shipmentId]"
+                                          carrierCode="#[map-payload:itemsQuantities]" title="#[map-payload:title]"
+                                          trackId="#[map-payload:trackId]"/>
+<!-- END_INCLUDE(magento:addOrderShipmentTrack) -->
+
+<!-- BEGIN_INCLUDE(magento:cancelOrder) -->
+        <magento:cancel-order orderId="#[map-payload:orderId]"/>
+<!-- END_INCLUDE(magento:cancelOrder) -->
+
+<!-- BEGIN_INCLUDE(magento:createOrderShipment) -->
+        <magento:create-order-shipment orderId="#[map-payload:orderId]"
+                                       comment="HelloWorld">
+            <magento:items-quantities>
+                <magento:items-quantity order_item_id="1" qty="10" />
+            </magento:items-quantities>
+        </magento:create-order-shipment>
+<!-- END_INCLUDE(magento:createOrderShipment) -->
+
+<!-- BEGIN_INCLUDE(magento:getOrder) -->
+        <magento:get-order orderId="#[map-payload:orderId]"  />
+<!-- END_INCLUDE(magento:getOrder) -->
+
+<!-- BEGIN_INCLUDE(magento:getOrderInvoice) -->
+        <magento:get-order-invoice invoiceId="#[map-payload:invoiceId]"/>
+<!-- END_INCLUDE(magento:getOrderInvoice) -->
+
+<!-- BEGIN_INCLUDE(magento:getOrderShipmentCarriers) -->
+        <magento:get-order-shipment-carriers orderId="#[map-payload:orderId]"/>
+<!-- END_INCLUDE(magento:getOrderShipmentCarriers) -->
+
+<!-- BEGIN_INCLUDE(magento:getOrderShipment) -->
+        <magento:get-order-shipment shipmentId="#[map-payload:orderShipmentId]"/>
+<!-- END_INCLUDE(magento:getOrderShipment) -->
+
+<!-- BEGIN_INCLUDE(magento:holdOrder) -->
+        <magento:hold-order orderId="#[map-payload:orderId]"/>
+<!-- END_INCLUDE(magento:holdOrder) -->
+
+<!-- BEGIN_INCLUDE(magento:listOrders) -->
+ <magento:list-orders filter="#[map-payload:operator](#[map-payload:filterKey], #[map-payload:orderId])"/>
+<!-- END_INCLUDE(magento:listOrders) -->
+
+<!-- BEGIN_INCLUDE(magento:listOrdersInvoices) -->
+<magento:list-orders-invoices filter="#[map-payload:operator](#[map-payload:filterKey], #[map-payload:orderId])"/>
+<!-- END_INCLUDE(magento:listOrdersInvoices) -->
+
+<!-- BEGIN_INCLUDE(magento:listOrdersShipments) -->
+<magento:list-orders-shipments filter="eq(order_id, #[map-payload:orderId])"/>
+<!-- END_INCLUDE(magento:listOrdersShipments) -->
+
+<!-- BEGIN_INCLUDE(magento:deleteOrderShipmentTrack) -->
+<magento:delete-order-shipment-track shipmentId="#[map-payload:shipmentId]" trackId="#[map-payload:trackId]"/>
+<!-- END_INCLUDE(magento:deleteOrderShipmentTrack) -->
+
+<!-- BEGIN_INCLUDE(magento:addOrderComment) -->
+        <magento:add-order-comment orderId="#[map-payload:orderId]"
+                                   status="#[map-payload:status]" comment="#[map-payload:comment]"
+                                   sendEmail="true"/>
+<!-- END_INCLUDE(magento:addOrderComment) -->
+
+<!-- BEGIN_INCLUDE(magento:unholdOrder) -->
+        <magento:unhold-order orderId="#[map-payload:orderId]"/>
+<!-- END_INCLUDE(magento:unholdOrder) -->
+
+<!-- BEGIN_INCLUDE(magento:createOrderInvoice) -->
+        <magento:create-order-invoice orderId="#[map-payload:orderId]">
+            <magento:items-quantities>
+              <magento:items-quantity order_item_id="1" qty="10" />
+            </magento:items-quantities>
+        </magento:create-order-invoice>
+<!-- END_INCLUDE(magento:createOrderInvoice) -->
+
+<!-- BEGIN_INCLUDE(magento:addOrderInvoiceComment) -->
+        <magento:add-order-invoice-comment
+                invoiceId="#[map-payload:shipmentId]"
+                comment="#[map-payload:comment]"/>
+<!-- END_INCLUDE(magento:addOrderInvoiceComment) -->
+
+<!-- BEGIN_INCLUDE(magento:captureOrderInvoice) -->
+<magento:capture-order-invoice invoiceId="#[map-payload:invoiceId]"/>
+<!-- END_INCLUDE(magento:captureOrderInvoice) -->
+
+<!-- BEGIN_INCLUDE(magento:voidOrderInvoice) -->
+<magento:void-order-invoice invoiceId="#[map-payload:invoiceId]"/>
+<!-- END_INCLUDE(magento:voidOrderInvoice) -->
+
+<!-- BEGIN_INCLUDE(magento:cancelOrderInvoice) -->
+<magento:cancel-order-invoice invoiceId="#[map-payload:invoiceId]"/>
+<!-- END_INCLUDE(magento:cancelOrderInvoice) -->
+
+<!-- BEGIN_INCLUDE(magento:createCustomerAddress) -->
+        <magento:create-customer-address customerId="#[map-payload:customerId]">
+            <magento:customer-address postcode="#[map-payload:postCode]" />
+        </magento:create-customer-address>
+<!-- END_INCLUDE(magento:createCustomerAddress) -->
+
+<!-- BEGIN_INCLUDE(magento:createCustomer) -->
+        <magento:create-customer>
+            <magento:customer email="#[map-payload:email]" firstname="#[map-payload:firstname]"
+                   lastname="#[map-payload:lastname]" password="#[map-payload:password]" />
+        </magento:create-customer>
+<!-- END_INCLUDE(magento:createCustomer) -->
+
+<!-- BEGIN_INCLUDE(magento:deleteCustomer) -->
+        <magento:delete-customer customerId="#[map-payload:customerId]"/>
+<!-- END_INCLUDE(magento:deleteCustomer) -->
+
+<!-- BEGIN_INCLUDE(magento:deleteCustomerAddress) -->
+        <magento:delete-customer-address addressId="#[map-payload:addressId]"/>
+<!-- END_INCLUDE(magento:deleteCustomerAddress) -->
+
+<!-- BEGIN_INCLUDE(magento:getCustomer) -->
+        <magento:get-customer customerId="#[map-payload:customerId]">
+            <magento:attribute-names>
+                <magento:attribute-name>customer_name</magento:attribute-name>
+                <magento:attribute-name>customer_last_name</magento:attribute-name>
+                <magento:attribute-name>customer_age</magento:attribute-name>
+            </magento:attribute-names>
+        </magento:get-customer>
+<!-- END_INCLUDE(magento:getCustomer) -->
+
+<!-- BEGIN_INCLUDE(magento:getCustomerAddress) -->
+        <magento:get-customer-address addressId="#[map-payload:addressId]"/>
+<!-- END_INCLUDE(magento:getCustomerAddress) -->
+
+<!-- BEGIN_INCLUDE(magento:listCustomerAddresses) -->
+     <magento:list-customer-addresses customerId="#[map-payload:customerAddresses]"/>
+<!-- END_INCLUDE(magento:listCustomerAddresses) -->
+
+<!-- BEGIN_INCLUDE(magento:listCustomerGroups) -->
+        <magento:list-customer-groups/>
+<!-- END_INCLUDE(magento:listCustomerGroups) -->
+
+<!-- BEGIN_INCLUDE(magento:listCustomers) -->
+        <magento:list-customers filter="gteq(customer_age, #[map-payload:minCustomerAge])"/>
+<!-- END_INCLUDE(magento:listCustomers) -->
+
+<!-- BEGIN_INCLUDE(magento:updateCustomer) -->
+        <magento:update-customer customerId="#[map-payload:customerId]">
+            <magento:customer firstname="#[map-payload:firstname]"
+                               lastname="#[map-payload:lastname]" />
+        </magento:update-customer>
+<!-- END_INCLUDE(magento:updateCustomer) -->
+
+<!-- BEGIN_INCLUDE(magento:updateCustomerAddress) -->
+        <magento:update-customer-address addressId="#[map-payload:addressId]">
+            <magento:customer-address postcode="#[map-payload:postCode]" region="#[map-payload:region]" />
+        </magento:update-customer-address>
+<!-- END_INCLUDE(magento:updateCustomerAddress) -->
+
+<!-- BEGIN_INCLUDE(magento:listStockItems) -->
+        <magento:list-stock-items>
+            <magento:product-id-or-skus>
+                <magento:product-id-or-sku>1560</magento:product-id-or-sku>
+                <magento:product-id-or-sku>JJFO986</magento:product-id-or-sku>
+            </magento:product-id-or-skus>
+        </magento:list-stock-items>
+<!-- END_INCLUDE(magento:listStockItems) -->
+
+<!-- BEGIN_INCLUDE(magento:updateStockItem) -->
+        <magento:update-stock-item productIdOrSku="#[map-payload:productIdOrSku]">
+            <magento:stock-item qty="2" />
+        </magento:update-stock-item>
+<!-- END_INCLUDE(magento:updateStockItem) -->
+
+<!-- BEGIN_INCLUDE(magento:listDirectoryCountries) -->
+        <magento:list-directory-countries/>
+<!-- END_INCLUDE(magento:listDirectoryCountries) -->
+
+<!-- BEGIN_INCLUDE(magento:listDirectoryRegions) -->
+        <magento:list-directory-regions countryId="#[map-payload:countryId]"/>
+<!-- END_INCLUDE(magento:listDirectoryRegions) -->
+
+<!-- BEGIN_INCLUDE(magento:addProductLink) -->
+        <magento:add-product-link type="#[map-payload:type]"
+                                  productId="#[map-payload:productId]"
+                                  linkedProductIdOrSku="#[map-payload:linkedProductId]">
+            <magento:product-link-entity qty="#[map-payload:qty]"/>
+        </magento:add-product-link>
+<!-- END_INCLUDE(magento:addProductLink) -->
+
+<!-- BEGIN_INCLUDE(magento:createProductAttributeMedia) -->
+        <magento:create-product-attribute-media
+                productId="#[map-payload:productId]"
+                baseFileName="#[map-payload:baseFileName]"
+                mimeType="JPEG">
+            <magento:catalog-product-attribute-media-entity label="#[map-payload:label]" position="#[map-payload:position]" />
+        </magento:create-product-attribute-media>
+<!-- END_INCLUDE(magento:createProductAttributeMedia) -->
+
+<!-- BEGIN_INCLUDE(magento:deleteProductAttributeMedia) -->
+        <magento:delete-product-attribute-media productSku="#[map-payload:productSku]"
+                                                fileName="#[map-payload:fileName]"/>
+<!-- END_INCLUDE(magento:deleteProductAttributeMedia) -->
+
+<!-- BEGIN_INCLUDE(magento:deleteProductLink) -->
+        <magento:delete-product-link type="#[map-payload:type]"
+                                     productId="#[map-payload:productId]"
+                                     linkedProductIdOrSku="#[map-payload:linkedProductId]"/>
+<!-- END_INCLUDE(magento:deleteProductLink) -->
+
+<!-- BEGIN_INCLUDE(magento:getProductAttributeMedia) -->
+        <magento:get-product-attribute-media productIdOrSku="#[map-payload:productIdOrSku]"
+                                             fileName="#[map-payload:fileName]"
+                                             storeViewIdOrCode="#[map-payload:storeViewId]"/>
+<!-- END_INCLUDE(magento:getProductAttributeMedia) -->
+
+<!-- BEGIN_INCLUDE(magento:getCatalogCurrentStoreView) -->
+        <magento:get-catalog-current-store-view />
+<!-- END_INCLUDE(magento:getCatalogCurrentStoreView) -->
+
+<!-- BEGIN_INCLUDE(magento:updateCategoryAttributeStoreView) -->
+        <magento:update-category-attribute-store-view storeViewIdOrCode="#[map-payload:storeCode]" />
+<!-- END_INCLUDE(magento:updateCategoryAttributeStoreView) -->
+
+<!-- BEGIN_INCLUDE(magento:listCategoryAttributes) -->
+        <magento:list-category-attributes />
+<!-- END_INCLUDE(magento:listCategoryAttributes) -->
+
+<!-- BEGIN_INCLUDE(magento:listCategoryAttributeOptions) -->
+        <magento:list-category-attribute-options attributeId="#[map-payload:attributeId]"/>
+<!-- END_INCLUDE(magento:listCategoryAttributeOptions) -->
+
+<!-- BEGIN_INCLUDE(magento:listProductAttributeMedia) -->
+        <magento:list-product-attribute-media
+                productId="#[map-payload:productId]"
+                storeViewIdOrCode="#[map-payload:storeViewId]"/>
+<!-- END_INCLUDE(magento:listProductAttributeMedia) -->
+
+<!-- BEGIN_INCLUDE(magento:listProductAttributeMediaTypes) -->
+        <magento:list-product-attribute-media-types setId="#[map-payload:setId]"/>
+<!-- END_INCLUDE(magento:listProductAttributeMediaTypes) -->
+
+<!-- BEGIN_INCLUDE(magento:listProductAttributeOptions) -->
+        <magento:list-product-attribute-options attributeId="#[map-payload:attributeId]"/>
+<!-- END_INCLUDE(magento:listProductAttributeOptions) -->
+
+<!-- BEGIN_INCLUDE(magento:listProductAttributes) -->
+        <magento:list-product-attributes setId="#[map-payload:setId]" />
+<!-- END_INCLUDE(magento:listProductAttributes) -->
+
+<!-- BEGIN_INCLUDE(magento:listProductAttributeSets) -->
+        <magento:list-product-attribute-sets />
+<!-- END_INCLUDE(magento:listProductAttributeSets) -->
+
+<!-- BEGIN_INCLUDE(magento:listProductAttributeTierPrices) -->
+        <magento:list-product-attribute-tier-prices productIdOrSku="#[map-payload:productIdOrSku]"/>
+<!-- END_INCLUDE(magento:listProductAttributeTierPrices) -->
+
+<!-- BEGIN_INCLUDE(magento:listProductLink) -->
+        <magento:list-product-link type="#[map-payload:type]" />
+<!-- END_INCLUDE(magento:listProductLink) -->
+
+<!-- BEGIN_INCLUDE(magento:listProductLinkAttributes) -->
+        <magento:list-product-link-attributes type="#[map-payload:type]"/>
+<!-- END_INCLUDE(magento:listProductLinkAttributes) -->
+
+<!-- BEGIN_INCLUDE(magento:listProductLinkTypes) -->
+        <magento:list-product-link-types/>
+<!-- END_INCLUDE(magento:listProductLinkTypes) -->
+
+<!-- BEGIN_INCLUDE(magento:listProductTypes) -->
+        <magento:list-product-types/>
+<!-- END_INCLUDE(magento:listProductTypes) -->
+
+<!-- BEGIN_INCLUDE(magento:updateProductAttributeMedia) -->
+        <magento:update-product-attribute-media fileName="#[map-payload:fileName]"
+                                                productId="#[map-payload:productId]">
+            <magento:catalog-product-attribute-media-entity label="#[map-payload:label]" position="#[map-payload:position]" />
+        </magento:update-product-attribute-media>
+<!-- END_INCLUDE(magento:updateProductAttributeMedia) -->
+
+<!-- BEGIN_INCLUDE(magento:updateProductAttributeTierPrice) -->
+        <magento:update-product-attribute-tier-price productSku="#[map-payload:productSku]">
+            <magento:catalog-product-tier-price-entity price="#[map-payload:price]" qty="#[map-payload:qty]"
+            website="#[map-payload:website]" customer_group_id="#[map-payload:customerGroupId]" />
+        </magento:update-product-attribute-tier-price>
+<!-- END_INCLUDE(magento:updateProductAttributeTierPrice) -->
+
+<!-- BEGIN_INCLUDE(magento:updateProductLink) -->
+        <magento:update-product-link type="#[map-payload:type]"
+                                     productId="#[map-payload:productId]"
+                                     linkedProductIdOrSku="#[map-payload:linkedProductId]">
+            <magento:catalog-product-link-entity qty="#[map-payload:qty]" />
+        </magento:update-product-link>
+<!-- END_INCLUDE(magento:updateProductLink) -->
+
+<!-- BEGIN_INCLUDE(magento:listCategoryProducts) -->
+        <magento:list-category-products categoryId="#[map-payload:categoryId]"/>
+<!-- END_INCLUDE(magento:listCategoryProducts) -->
+
+<!-- BEGIN_INCLUDE(magento:addCategoryProduct) -->
+        <magento:add-category-product categoryId="#[map-payload:categoryId]" position="#[map-payload:position]" />
+<!-- END_INCLUDE(magento:addCategoryProduct) -->
+
+<!-- BEGIN_INCLUDE(magento:createCategory) -->
+        <magento:create-category parentId="#[map-payload:parentId]">
+            <magento:catalog-category-entity description="#[map-payload:description]" is_active="#[map-payload:isActive]" />
+        </magento:create-category>
+<!-- END_INCLUDE(magento:createCategory) -->
+
+<!-- BEGIN_INCLUDE(magento:deleteCategory) -->
+        <magento:delete-category categoryId="#[map-payload:categoryId]"/>
+<!-- END_INCLUDE(magento:deleteCategory) -->
+
+<!-- BEGIN_INCLUDE(magento:getCategory) -->
+        <magento:get-category categoryId="#[map-payload:categoryId]">
+            <magento:attribute-names>
+                <magento:attribute-name>customer_name</magento:attribute-name>
+                <magento:attribute-name>customer_last_name</magento:attribute-name>
+                <magento:attribute-name>customer_age</magento:attribute-name>
+            </magento:attribute-names>
+        </magento:get-category>
+<!-- END_INCLUDE(magento:getCategory) -->
+
+<!-- BEGIN_INCLUDE(magento:listCategoryLevels) -->
+        <magento:list-category-levels/>
+<!-- END_INCLUDE(magento:listCategoryLevels) -->
+
+<!-- BEGIN_INCLUDE(magento:moveCategory) -->
+        <magento:move-category categoryId="#[map-payload:categoryId]" parentId="#[map-payload:afterId]"/>
+<!-- END_INCLUDE(magento:moveCategory) -->
+
+<!-- BEGIN_INCLUDE(magento:deleteCategoryProduct) -->
+        <magento:delete-category-product
+                categoryId="#[map-payload:categoryId]"
+                productSku="#[map-payload:productSku]"/>
+<!-- END_INCLUDE(magento:deleteCategoryProduct) -->
+
+<!-- BEGIN_INCLUDE(magento:getCategoryTree) -->
+        <magento:get-category-tree parentId="#[map-payload:parentId]" />
+<!-- END_INCLUDE(magento:getCategoryTree) -->
+
+<!-- BEGIN_INCLUDE(magento:updateCategory) -->
+        <magento:update-category categoryId="#[map-payload:categoryId]">
+            <magento:catalog-category-entity description="#[map-payload:description]" is_active="#[map-payload:isActive]" />
+        </magento:update-category>
+<!-- END_INCLUDE(magento:updateCategory) -->
+
+<!-- BEGIN_INCLUDE(magento:updateCategoryProduct) -->
+        <magento:update-category-product categoryId="#[map-payload:categoryId]" position="#[map-payload:position]" />
+<!-- END_INCLUDE(magento:updateCategoryProduct) -->
+
+<!-- BEGIN_INCLUDE(magento:listInventoryStockItems) -->
+        <magento:list-inventory-stock-items>
+            <magento:product-id-or-skus>
+                <magento:product-id-or-sku>1560</magento:product-id-or-sku>
+                <magento:product-id-or-sku>10036</magento:product-id-or-sku>
+                <magento:product-id-or-sku>9868</magento:product-id-or-sku>
+            </magento:product-id-or-skus>
+        </magento:list-inventory-stock-items>
+<!-- END_INCLUDE(magento:listInventoryStockItems) -->
+
+<!-- BEGIN_INCLUDE(magento:updateInventoryStockItem) -->
+        <magento:update-inventory-stock-item productIdOrSku="#[map-payload:productIdOrSku]">
+            <magento:catalog-inventory-stock-item qty="#[map-payload:quantity]" />
+        </magento:update-inventory-stock-item>
+<!-- END_INCLUDE(magento:updateInventoryStockItem) -->
+
+<!-- BEGIN_INCLUDE(magento:createProduct) -->
+        <magento:create-product set="4" sku="78962" type="simple"/>
+<!-- END_INCLUDE(magento:createProduct) -->
+
+<!-- BEGIN_INCLUDE(magento:deleteProduct) -->
+        <magento:delete-product productId="#[map-payload:productId]"/>
+<!-- END_INCLUDE(magento:deleteProduct) -->
+
+<!-- BEGIN_INCLUDE(magento:getProductSpecialPrice) -->
+        <magento:get-product-special-price productId="#[map-payload:productId]"/>
+<!-- END_INCLUDE(magento:getProductSpecialPrice) -->
+
+<!-- BEGIN_INCLUDE(magento:getProduct) -->
+        <magento:get-product productIdOrSku="#[map-payload:productIdOrSku]"
+                             storeViewIdOrCode="#[map-payload:storeViewCode]">
+            <magento:attributes-names>
+                <magento:attributes-name>sku</magento:attributes-name>
+            </magento:attributes-names>
+            <magento:additional-attribute-names>
+                <magento:additional-attribute-name>keyboard_distribution_type</magento:additional-attribute-name>
+            </magento:additional-attribute-names>
+        </magento:get-product>
+<!-- END_INCLUDE(magento:getProduct) -->
+
+<!-- BEGIN_INCLUDE(magento:listProducts) -->
+        <magento:list-products />
+<!-- END_INCLUDE(magento:listProducts) -->
+
+<!-- BEGIN_INCLUDE(magento:updateProductSpecialPrice) -->
+        <magento:update-product-special-price specialPrice="#[variable:session:specialPrice]"
+                                              productId="#[variable:session:productId]"/>
+<!-- END_INCLUDE(magento:updateProductSpecialPrice) -->
+
+<!-- BEGIN_INCLUDE(magento:updateProduct) -->
+        <magento:update-product productIdOrSku="#[map-payload:productIdOrSku]">
+            <magento:catalog-product-entity name="#[map-payload:name]" />
+        </magento:update-product>
+<!-- END_INCLUDE(magento:updateProduct) -->
+
+<!-- BEGIN_INCLUDE(magento:createShoppingCart) -->
+        <magento:create-shopping-cart />
+<!-- END_INCLUDE(magento:createShoppingCart) -->
+
+<!-- BEGIN_INCLUDE(magento:getInfoShoppingCart) -->
+        <magento:get-info-shopping-cart quoteId="1" />
+<!-- END_INCLUDE(magento:getInfoShoppingCart) -->
+
+<!-- BEGIN_INCLUDE(magento:listShoppingCartTotals) -->
+        <magento:list-shopping-cart-totals quoteId="1" />
+<!-- END_INCLUDE(magento:listShoppingCartTotals) -->
+
+<!-- BEGIN_INCLUDE(magento:createShoppingCartOrder) -->
+        <magento:create-shopping-cart-order quoteId="1" />
+<!-- END_INCLUDE(magento:createShoppingCartOrder) -->
+
+<!-- BEGIN_INCLUDE(magento:listShoppingCartLicenses) -->
+        <magento:list-shopping-cart-licenses quoteId="1" />
+<!-- END_INCLUDE(magento:listShoppingCartLicenses) -->
+
+<!-- BEGIN_INCLUDE(magento:addShoppingCartProduct) -->
+        <magento:add-shopping-cart-product quoteId="1">
+            <magento:products>
+                <magento:product product_id="1" sku="123" qty="2" />
+            </magento:products>
+        </magento:add-shopping-cart-product>
+<!-- END_INCLUDE(magento:addShoppingCartProduct) -->
+
+<!-- BEGIN_INCLUDE(magento:updateShoppingCartProduct) -->
+        <magento:update-shopping-cart-product quoteId="1">
+            <magento:products>
+                  <magento:product product_id="1" sku="123" qty="2" />
+            </magento:products>
+        </magento:update-shopping-cart-product>
+<!-- END_INCLUDE(magento:updateShoppingCartProduct) -->
+
+<!-- BEGIN_INCLUDE(magento:removeShoppingCartProduct) -->
+        <magento:remove-shopping-cart-product quoteId="1">
+            <magento:products>
+               <magento:product product_id="1" sku="123" qty="2" />
+            </magento:products>
+        </magento:remove-shopping-cart-product>
+<!-- END_INCLUDE(magento:removeShoppingCartProduct) -->
+
+<!-- BEGIN_INCLUDE(magento:listShoppingCartProducts) -->
+        <magento:list-shopping-cart-products quoteId="1" />
+<!-- END_INCLUDE(magento:listShoppingCartProducts) -->
+
+<!-- BEGIN_INCLUDE(magento:moveShoppingCartProductToCustomerQuote) -->
+        <magento:move-shopping-cart-product-to-customer-quote quoteId="1">
+            <magento:products>
+               <magento:product product_id="1" sku="123" qty="2" />
+            </magento:products>
+        </magento:move-shopping-cart-product-to-customer-quote>
+<!-- END_INCLUDE(magento:moveShoppingCartProductToCustomerQuote) -->
+
+<!-- BEGIN_INCLUDE(magento:setShoppingCartCustomer) -->
+        <magento:set-shopping-cart-customer quoteId="1">
+        <magento:customer ref="#[payload]" />
+        </magento:set-shopping-cart-customer>
+<!-- END_INCLUDE(magento:setShoppingCartCustomer) -->
+
+<!-- BEGIN_INCLUDE(magento:setShoppingCartCustomerAddresses) -->
+        <magento:set-shopping-cart-customer-addresses quoteId="1">
+            <magento:shopping-cart-customer-addresses>
+                <magento:shopping-cart-customer-address mode="billing" firstname="customername" lastname="customerlastname" street="customerStreet" />
+                <magento:shopping-cart-customer-address mode="billing" firstname="customername2" lastname="customerlastname2" street="customerStreet2" />
+            </magento:shopping-cart-customer-addresses>
+        </magento:set-shopping-cart-customer-addresses>
+<!-- END_INCLUDE(magento:setShoppingCartCustomerAddresses) -->
+
+<!-- BEGIN_INCLUDE(magento:setShoppingCartShippingMethod) -->
+        <magento:set-shopping-cart-shipping-method quoteId="1" method="air" />
+<!-- END_INCLUDE(magento:setShoppingCartShippingMethod) -->
+
+<!-- BEGIN_INCLUDE(magento:listShoppingCartShippingMethods) -->
+        <magento:list-shopping-cart-shipping-methods quoteId="1" />
+<!-- END_INCLUDE(magento:listShoppingCartShippingMethods) -->
+
+<!-- BEGIN_INCLUDE(magento:setShoppingCartPaymentMethod) -->
+        <magento:set-shopping-cart-payment-method quoteId="1">
+            <magento:shopping-cart-payment-method po_number="123" method="air" cc_cid="VISA" cc_owner="John Doe"
+                cc_number="112123123" cc_type="Visa" cc_exp_year="2018" cc_exp_month="2" />
+        </magento:set-shopping-cart-payment-method>
+<!-- END_INCLUDE(magento:setShoppingCartPaymentMethod) -->
+
+<!-- BEGIN_INCLUDE(magento:listShoppingCartPaymentMethods) -->
+        <magento:list-shopping-cart-payment-methods quoteId="1" />
+<!-- END_INCLUDE(magento:listShoppingCartPaymentMethods) -->
+
+<!-- BEGIN_INCLUDE(magento:addShoppingCartCoupon) -->
+        <magento:add-shopping-cart-coupon quoteId="1" couponCode="MAY-DISC" />
+<!-- END_INCLUDE(magento:addShoppingCartCoupon) -->
+
+<!-- BEGIN_INCLUDE(magento:removeShoppingCartCoupon) -->
+        <magento:remove-shopping-cart-coupon quoteId="1" />
+<!-- END_INCLUDE(magento:removeShoppingCartCoupon) -->
