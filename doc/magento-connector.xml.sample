@@ -68,7 +68,7 @@
 <!-- END_INCLUDE(magento:unholdOrder) -->
 
 <!-- BEGIN_INCLUDE(magento:createOrderInvoice) -->
-        <magento:create-order-invoice orderId="#[map-payload:orderId]">
+        <magento:create-order-invoice orderId="#[map-payload:orderId]" comment="#[map-payload:comment]"  >
             <magento:items-quantities>
               <magento:items-quantity order_item_id="1" qty="10" />
             </magento:items-quantities>

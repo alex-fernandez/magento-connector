@@ -8,37 +8,17 @@
 
 package org.mule.module.magento;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.magento.api.*;
 import org.mule.api.ConnectionException;
 import org.mule.api.ConnectionExceptionCode;
-import org.mule.api.annotations.Connect;
-import org.mule.api.annotations.ConnectionIdentifier;
-import org.mule.api.annotations.Connector;
-import org.mule.api.annotations.Disconnect;
-import org.mule.api.annotations.MetaDataKeyRetriever;
-import org.mule.api.annotations.MetaDataRetriever;
-import org.mule.api.annotations.MetaDataSwitch;
-import org.mule.api.annotations.Processor;
-import org.mule.api.annotations.QueryTranslator;
-import org.mule.api.annotations.ValidateConnection;
+import org.mule.api.annotations.*;
 import org.mule.api.annotations.display.Password;
 import org.mule.api.annotations.display.Placement;
 import org.mule.api.annotations.param.ConnectionKey;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.api.annotations.param.Payload;
-import org.mule.common.metadata.DefaultMetaData;
-import org.mule.common.metadata.DefaultMetaDataKey;
-import org.mule.common.metadata.DefaultPojoMetaDataModel;
-import org.mule.common.metadata.MetaData;
-import org.mule.common.metadata.MetaDataKey;
+import org.mule.common.metadata.*;
 import org.mule.common.query.Query;
 import org.mule.module.magento.api.AxisPortProvider;
 import org.mule.module.magento.api.DefaultAxisPortProvider;
@@ -61,7 +41,9 @@ import org.mule.module.magento.api.shoppingCart.AxisMagentoShoppingCartClient;
 import org.mule.module.magento.api.shoppingCart.MagentoShoppingCartClient;
 import org.mule.module.magento.query.MagentoQueryVisitor;
 
-import com.magento.api.*;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 //import java.util.Map;
 
@@ -71,7 +53,7 @@ import com.magento.api.*;
  *
  * @author MuleSoft, Inc.
  */
-@Connector(name = "magento", schemaVersion = "1.1", friendlyName = "Magento", minMuleVersion = "3.5", metaData=MetaDataSwitch.ON)
+@Connector(name = "magento", schemaVersion = "1.1", friendlyName = "Magento", minMuleVersion = "3.4", metaData=MetaDataSwitch.ON)
 public class MagentoCloudConnector {
 
 	private static final String ENTITY_PACKAGE = "com.magento.api";
